@@ -1,0 +1,24 @@
+import React from "react";
+import { useLocation } from "react-router-dom";
+
+export default function HomeIconSVG() {
+  const currentPath = useLocation().pathname;
+  const isActive = currentPath === "/";
+
+  return (
+    <svg
+      className="w-full h-auto"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M15.9993 15C13.7893 16.333 10.2073 16.333 7.99927 15M18.9993 8.71001L13.6663 4.56201C13.1983 4.19792 12.6223 4.00024 12.0293 4.00024C11.4363 4.00024 10.8603 4.19792 10.3923 4.56201L5.0583 8.71001C4.73774 8.9593 4.47839 9.27854 4.30005 9.64336C4.12171 10.0082 4.02911 10.4089 4.0293 10.815V18.015C4.0293 18.5454 4.24001 19.0542 4.61508 19.4292C4.99016 19.8043 5.49886 20.015 6.0293 20.015H18.0293C18.5597 20.015 19.0684 19.8043 19.4435 19.4292C19.8186 19.0542 20.0293 18.5454 20.0293 18.015V10.815C20.0293 9.99201 19.6493 9.21501 18.9993 8.71001Z"
+        stroke={isActive ? "#fff" : "#637381"}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
