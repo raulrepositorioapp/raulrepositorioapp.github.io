@@ -9,6 +9,10 @@ export default function RoutePage() {
   const vehicleData = useLocation().state?.data;
   const [locationCoordinates, setLocationCoordinates] = useState();
 
+  if (!vehicleData) {
+    window.location.href = "/vechile";
+  }
+
   // Google Maps
   const libraries = ["places"];
 

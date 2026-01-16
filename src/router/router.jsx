@@ -5,7 +5,6 @@ import HomePage from "@/pages/HomePage";
 import VehiclePage from "@/pages/VehiclePage";
 import RoutePage from "@/pages/RoutePage";
 import ResultPage from "@/pages/ResultPage";
-import NotificationPage from "@/pages/NotificationPage";
 import RouteAnalysisResults from "@/pages/RouteAnalysisResults";
 import AuthLayout from "@/layout/AuthLayout";
 import LoginPage from "@/pages/AuthPages/LoginPage";
@@ -69,10 +68,6 @@ const router = createBrowserRouter([
         path: "route-analysis-results",
         element: <RouteAnalysisResults />,
       },
-      // {
-      //   path: "notification",
-      //   element: <NotificationPage />,
-      // },
     ],
   },
 ]);

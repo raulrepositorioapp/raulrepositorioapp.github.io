@@ -98,6 +98,15 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
 
   const isFormFilled = hasFile || hasTextInput;
 
+  const vehicleTypeOptions = [
+    { value: "", label: "Select vehicle type" },
+    { value: "car", label: "Car" },
+    { value: "bike", label: "Bike" },
+    { value: "bus", label: "Bus" },
+    { value: "truck", label: "Truck" },
+    { value: "other", label: "Other" },
+  ];
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
@@ -119,11 +128,21 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 placeholder="Vehicle Name"
                 className="border rounded-lg p-3 text-sm"
               />
-              <input
-                {...register("vehicleType")}
-                placeholder="Vehicle Type"
-                className="border rounded-lg p-3 text-sm"
-              />
+              {/* Vehicle Type Select */}
+              <div>
+                <select
+                  {...register("vehicleType", {
+                    required: "Vehicle type is required",
+                  })}
+                  className={`border rounded-lg p-3 text-sm w-full border-gray-300`}
+                >
+                  {vehicleTypeOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <input
                 {...register("powerKW")}
                 placeholder="Power (KW)"

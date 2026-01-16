@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BatteryCharging, Clock, Gauge, TrendingUp } from "lucide-react";
 import CommonButton from "../common/CommonButton";
 import { IoIosArrowDown } from "react-icons/io";
+import usePdfExport from "@/hooks/Export/usePdfExport";
+import Loader from "../common/Loader";
 
-export default function RouteAnalysisResultsTopSection({ analysisData }) {
+export default function RouteAnalysisResultsTopSection({
+  analysisData,
+  locationData,
+  tripId,
+}) {
+  // History Analytics Data
   const data = [
     {
       id: 1,
@@ -40,11 +47,25 @@ export default function RouteAnalysisResultsTopSection({ analysisData }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("Export File");
 
-  const countries = ["Export PDF ", "Export CSV"];
+  const exportOptions = ["Export PDF"];
 
-  const handleSelect = (country) => {
+  // PDF Download Hook
+  const [shouldDownload, setShouldDownload] = useState(false);
+  const { pdfExport, isPdfExportLoading } = usePdfExport({
+    id: tripId,
+  });
+
+  useEffect(() => {
+    if (shouldDownload && pdfExport?.download_url) {
+      window.open(pdfExport.download_url, "_blank", "noopener,noreferrer");
+      setShouldDownload(false);
+    }
+  }, [shouldDownload, pdfExport]);
+
+  const handleExportSelect = (country) => {
     setSelected(country);
     setIsOpen(false);
+    setShouldDownload(true);
   };
 
   return (
@@ -54,7 +75,9 @@ export default function RouteAnalysisResultsTopSection({ analysisData }) {
           <h1 className="text-[#212B36] font-roboto text-[32px] font-semibold leading-[38.4px]">
             Route Analysis Results
           </h1>
-          <p className="paragraph mt-2">Valladolid, Spain To Madrid, Spain</p>
+          <p className="paragraph mt-2">
+            {locationData?.origin} To {locationData?.destination}
+          </p>
         </div>
 
         {/* button */}
@@ -75,13 +98,13 @@ export default function RouteAnalysisResultsTopSection({ analysisData }) {
 
             {isOpen && (
               <ul className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded shadow-md mt-1 py-2 z-50">
-                {countries.map((country) => (
+                {exportOptions.map((option) => (
                   <li
-                    key={country}
+                    key={option}
                     className="px-4 py-2 hover:bg-[#2FA75F] hover:text-white cursor-pointer"
-                    onClick={() => handleSelect(country)}
+                    onClick={() => handleExportSelect(option)}
                   >
-                    {country}
+                    {option}
                   </li>
                 ))}
               </ul>
@@ -93,17 +116,17 @@ export default function RouteAnalysisResultsTopSection({ analysisData }) {
       </div>
 
       <div className="grid lg:grid-cols-4 gap-6">
-        {data.map((item) => (
+        {data?.map((item) => (
           <div
             className="bg-white p-6 rounded-2xl border mt-8 space-y-4"
-            key={item.id}
+            key={item?.id}
           >
             <div className="flex items-start gap-2 justify-between ">
               <div>
-                <h1 className="title text-[#4F586D]! ">{item.title}</h1>
+                <h1 className="title text-[#4F586D]! ">{item?.title}</h1>
                 <p className="paragraph mt-4 text-lg font-medium">
-                  <span className="text-[32px] text-black">{item.value}</span>{" "}
-                  {item.unit}
+                  <span className="text-[32px] text-black">{item?.value}</span>{" "}
+                  {item?.unit}
                 </p>
               </div>
               <div className="bg-gray-200 p-2 rounded-full flex items-center justify-center">
@@ -111,15 +134,19 @@ export default function RouteAnalysisResultsTopSection({ analysisData }) {
               </div>
             </div>
 
-            <p className="paragraph mt-2 flex items-center gap-2">
-              <span className="text-[#20A157]">
-                <TrendingUp />
-              </span>{" "}
-              {item.extraInfo}
-            </p>
+            {item?.extraInfo && (
+              <p className="paragraph mt-2 flex items-center gap-2">
+                <span className="text-[#20A157]">
+                  <TrendingUp />
+                </span>{" "}
+                {item?.extraInfo}
+              </p>
+            )}
           </div>
         ))}
       </div>
+
+      {isPdfExportLoading && <Loader />}
     </div>
   );
 }

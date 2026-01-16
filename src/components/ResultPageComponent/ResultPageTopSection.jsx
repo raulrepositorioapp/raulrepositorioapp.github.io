@@ -29,14 +29,12 @@ export default function ResultPageTopSection() {
       id: 3,
       title: "Trip Duration",
       value: historyAnalytics?.avg_trip_duration || 0,
-      extraInfo: "Includes 0 charging stops",
       icon: Clock,
     },
     {
       id: 4,
       title: "Arrival SoC",
       value: historyAnalytics?.avg_arrival_soc || 0,
-      extraInfo: "Started at 90%",
       icon: Gauge,
     },
   ];
@@ -51,7 +49,7 @@ export default function ResultPageTopSection() {
           >
             <div className="flex items-start gap-2 justify-between ">
               <div>
-                <h1 className="title text-[#4F586D]! ">{item?.title}</h1>
+                <h1 className="title text-[#4F586D]!">{item?.title}</h1>
                 <p className="paragraph mt-4 text-lg font-medium">
                   <span className="text-[32px] text-black">{item?.value}</span>{" "}
                   {item?.unit}
@@ -62,12 +60,14 @@ export default function ResultPageTopSection() {
               </div>
             </div>
 
-            <p className="paragraph mt-2 flex items-center gap-2">
-              <span className="text-[#20A157]">
-                <TrendingUp />
-              </span>{" "}
-              {item?.extraInfo}
-            </p>
+            {item?.extraInfo && (
+              <p className="paragraph mt-2 flex items-center gap-2">
+                <span className="text-[#20A157]">
+                  <TrendingUp />
+                </span>{" "}
+                {item?.extraInfo}
+              </p>
+            )}
           </div>
         ))}
       </div>
