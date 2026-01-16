@@ -12,6 +12,12 @@ import { store } from "./Redux/store";
 
 const queryClient = new QueryClient();
 
+const redirect = sessionStorage.redirect;
+if (redirect) {
+  sessionStorage.removeItem("redirect");
+  window.history.replaceState(null, null, redirect);
+}
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
