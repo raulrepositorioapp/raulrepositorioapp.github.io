@@ -58,7 +58,7 @@ function ZoomControls() {
   };
 
   return (
-    <div className="absolute bottom-20 right-3 flex flex-col gap-2 z-10">
+    <div className="absolute bottom-3 right-3 flex flex-col gap-2 z-10">
       <button
         onClick={zoomIn}
         className="w-9 h-9 bg-white rounded-md shadow border flex items-center justify-center text-lg hover:bg-gray-100 cursor-pointer"
@@ -239,7 +239,8 @@ export default function RouteMapSection({ locationCoordinates }) {
             )}
           </Map>
 
-          {routes.length > 0 && (
+          {/* This is a list of routes, but no longer needed */}
+          {/* {routes.length > 0 && (
             <div className="absolute top-3 left-3 flex flex-col gap-2">
               {routes.map((route, index) => {
                 const isActive = index === selectedIndex;
@@ -262,7 +263,7 @@ export default function RouteMapSection({ locationCoordinates }) {
                 );
               })}
             </div>
-          )}
+          )} */}
 
           {isLoading && locationCoordinates?.length === 2 && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/80">
@@ -271,7 +272,7 @@ export default function RouteMapSection({ locationCoordinates }) {
           )}
 
           {locationCoordinates?.length === 2 && (
-            <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg border">
+            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg border">
               <div className="flex items-center gap-2 text-sm">
                 <div className="flex items-center gap-1.5">
                   <div className="size-3 rounded-full bg-green-500" />

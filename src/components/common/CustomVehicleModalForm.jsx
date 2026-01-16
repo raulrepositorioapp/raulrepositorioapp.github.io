@@ -214,7 +214,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                   : "bg-gray-300 cursor-not-allowed"
               }`}
             >
-              {vehicle?.is_default ? "Save as New Vehicle" : "Save & Update"}
+              Save & Update
             </button>
           </div>
         </form>

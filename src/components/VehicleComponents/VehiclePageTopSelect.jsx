@@ -43,7 +43,7 @@ export default function VehicleCard() {
   };
 
   return (
-    <div>
+    <div className="relative">
       {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
@@ -66,69 +66,81 @@ export default function VehicleCard() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {vehicles?.data?.map((vehicle) => (
-          <div
-            key={vehicle?.id}
-            onClick={() => handleSelectVehicle(vehicle)}
-            className={`bg-white rounded-xl shadow-sm border-2 overflow-hidden hover:shadow-md transition-shadow cursor-pointer
+          <>
+            {vehicle?.is_active && (
+              <div
+                key={vehicle?.id}
+                onClick={() => handleSelectVehicle(vehicle)}
+                className={`bg-white rounded-xl shadow-sm border-2 overflow-hidden hover:shadow-md transition-shadow cursor-pointer
               ${
                 selectedVehicle?.id === vehicle?.id
                   ? "border-emerald-500"
                   : "border-gray-200"
               }
             `}
-          >
-            <div className="bg-black p-5 relative">
-              <img
-                src={import.meta.env.VITE_MEDIA_URL + vehicle?.photo}
-                alt={vehicle?.name}
-                className="w-full h-48 object-cover rounded-lg"
-              />
-
-              {vehicle?.is_default && (
-                <Pin className="text-white absolute top-2 right-2 rotate-45 z-2" />
-              )}
-            </div>
-
-            <div className="p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-[#212B36] text-[24px] leading-9">
-                  {vehicle?.name}
-                </h3>
-                <span className="text-[#1CA9A6] text-[20px] leading-[30px] font-medium capitalize">
-                  {vehicle?.vehicle_type}
-                </span>
-              </div>
-
-              <div className="flex justify-between gap-4 mb-4">
-                <SpecItem label="Power" value={vehicle?.power_kw} type="KW" />
-                <SpecItem label="Weight" value={vehicle?.weight_kg} type="Kg" />
-              </div>
-
-              <div className="flex justify-between gap-4 mb-4">
-                <SpecItem
-                  label="Battery"
-                  value={vehicle?.usable_battery_capacity_kwh}
-                  type="KWh"
-                />
-                <SpecItem
-                  label="Frontal Area"
-                  value={vehicle?.frontal_area_m2}
-                  type="m2"
-                />
-              </div>
-
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleCustomizeVehicle(vehicle);
-                }}
-                className="w-full border text-gray-500 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 hover:border-emerald-500 hover:text-emerald-500 duration-300 cursor-pointer"
               >
-                <Wrench size={18} />
-                Custom Vehicle
-              </button>
-            </div>
-          </div>
+                <div className="bg-black p-5 relative">
+                  <img
+                    src={import.meta.env.VITE_MEDIA_URL + vehicle?.photo}
+                    alt={vehicle?.name}
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
+
+                  {vehicle?.is_default && (
+                    <Pin className="text-white absolute top-2 right-2 rotate-45 z-2" />
+                  )}
+                </div>
+
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-[#212B36] text-[24px] leading-9">
+                      {vehicle?.name}
+                    </h3>
+                    <span className="text-[#1CA9A6] text-[20px] leading-[30px] font-medium capitalize">
+                      {vehicle?.vehicle_type}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between gap-4 mb-4">
+                    <SpecItem
+                      label="Power"
+                      value={vehicle?.power_kw}
+                      type="KW"
+                    />
+                    <SpecItem
+                      label="Weight"
+                      value={vehicle?.weight_kg}
+                      type="Kg"
+                    />
+                  </div>
+
+                  <div className="flex justify-between gap-4 mb-4">
+                    <SpecItem
+                      label="Battery"
+                      value={vehicle?.usable_battery_capacity_kwh}
+                      type="KWh"
+                    />
+                    <SpecItem
+                      label="Frontal Area"
+                      value={vehicle?.frontal_area_m2}
+                      type="m2"
+                    />
+                  </div>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleCustomizeVehicle(vehicle);
+                    }}
+                    className="w-full border text-gray-500 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 hover:border-emerald-500 hover:text-emerald-500 duration-300 cursor-pointer"
+                  >
+                    <Wrench size={18} />
+                    Custom Vehicle
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
         ))}
 
         {isAllVehiclesLoading &&
