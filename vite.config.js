@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/raulrepositorioapp.github.io/",
+  base: "/raulrepositorioapp.github.io",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
