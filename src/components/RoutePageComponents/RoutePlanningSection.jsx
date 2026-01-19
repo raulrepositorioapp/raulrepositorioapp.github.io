@@ -104,7 +104,7 @@ export default function RoutePlanningSection({
         } else {
           console.warn(
             "Geocode was not successful for the following reason:",
-            status
+            status,
           );
           resolve(null);
         }
@@ -168,7 +168,7 @@ export default function RoutePlanningSection({
     if (originRef.current) {
       const auto = new window.google.maps.places.Autocomplete(
         originRef.current,
-        { types: ["(cities)"] }
+        { types: ["(cities)"] },
       );
 
       auto.addListener("place_changed", () => {
@@ -187,7 +187,7 @@ export default function RoutePlanningSection({
     if (destinationRef.current) {
       const auto = new window.google.maps.places.Autocomplete(
         destinationRef.current,
-        { types: ["(cities)"] }
+        { types: ["(cities)"] },
       );
 
       auto.addListener("place_changed", () => {
@@ -333,7 +333,9 @@ export default function RoutePlanningSection({
                   handleSliderChange(value, "startingCharge")
                 }
               />
-              <span className="w-[5ch]">{sliderValues.startingCharge}%</span>
+              <span translate="no" className="w-[5ch]">
+                {sliderValues.startingCharge}%
+              </span>
             </div>
           </div>
 
@@ -348,7 +350,9 @@ export default function RoutePlanningSection({
                   handleSliderChange(value, "minArrivalCharge")
                 }
               />
-              <span className="w-[5ch]">{sliderValues.minArrivalCharge}%</span>
+              <span translate="no" className="w-[5ch]">
+                {sliderValues.minArrivalCharge}%
+              </span>
             </div>
           </div>
         </div>
