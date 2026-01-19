@@ -7,8 +7,9 @@ export default function usePlacesAutocomplete(inputRef, onSelect) {
     const autocomplete = new window.google.maps.places.Autocomplete(
       inputRef.current,
       {
-        types: ["(cities)"],
-      }
+        types: ["address"],
+        fields: ["formatted_address", "geometry", "address_components"],
+      },
     );
 
     autocomplete.addListener("place_changed", () => {

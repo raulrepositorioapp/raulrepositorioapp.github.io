@@ -23,7 +23,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
     }
 
     return elevationData.map((point) => {
-      const distanceInMiles = point.x_km * 0.621371;
+      const distanceInMiles = point.x_km;
 
       // Assuming soc comes as percentage 0-100
       // Adjust this logic according to your actual SOC format
@@ -43,7 +43,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
 
   const data = transformData();
 
-  // Dynamic height - makes chart feel better with few points
+  // Dynamic height
   const baseHeight = 380;
   const extraHeight = data.length <= 8 ? 80 : 0;
   const chartHeight = baseHeight + extraHeight;
@@ -62,7 +62,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
             Limited data points available ({data.length})
           </p>
           <div className="mt-3 space-y-1 text-sm">
-            <p className="font-medium">Distance: {label} mi</p>
+            <p className="font-medium">Distance: {label} km</p>
             <p style={{ color: "#2980b9" }}>
               Elevation: {payload[0]?.value} ft
             </p>
@@ -121,7 +121,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
             <XAxis
               dataKey="distance"
               label={{
-                value: "Distance (mi)",
+                value: "Distance (km)",
                 position: "insideBottom",
                 dy: 10,
                 fontSize: 12,
@@ -150,7 +150,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
               domain={[0, "dataMax + 20"]}
               tick={{ fill: "#2980b9", fontSize: 11 }}
               label={{
-                value: "Elevation (ft)",
+                value: "Elevation (meters)",
                 angle: 90,
                 position: "insideRight",
                 fill: "#2980b9",

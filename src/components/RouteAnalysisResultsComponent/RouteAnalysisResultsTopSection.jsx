@@ -15,8 +15,8 @@ export default function RouteAnalysisResultsTopSection({
     {
       id: 1,
       title: "Total Distance",
-      value: analysisData?.total_distance_mi,
-      unit: "mi",
+      value: analysisData?.total_distance_km,
+      unit: "km",
       extraInfo: "Route Optimized for efficiency",
       icon: Route,
     },
