@@ -23,12 +23,12 @@ export default function ChargingStops({ ChargingStops }) {
               <div>
                 <p>Charger power: {item?.charger_power_kw} KW</p>
                 <p className="text-[#4CBF82] font-medium">
-                  Arrival Battery: {item?.arrival_soc}
+                  Arrival Battery: {item?.arrival_soc}%
                 </p>
               </div>
 
               <div className="text-right">
-                <p>Distance: {item?.distance_from_route_km} km</p>
+                <p>Distance: {item?.distance_from_route_km.toFixed(2)} km</p>
                 <p>Charging Time: {item?.charge_time_min} min</p>
               </div>
             </div>

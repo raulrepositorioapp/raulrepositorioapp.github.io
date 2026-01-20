@@ -168,7 +168,7 @@ export default function RoutePlanningSection({
     if (originRef.current) {
       const auto = new window.google.maps.places.Autocomplete(
         originRef.current,
-        { types: ["(cities)"] },
+        { types: ["address"] },
       );
 
       auto.addListener("place_changed", () => {
@@ -187,7 +187,7 @@ export default function RoutePlanningSection({
     if (destinationRef.current) {
       const auto = new window.google.maps.places.Autocomplete(
         destinationRef.current,
-        { types: ["(cities)"] },
+        { types: ["address"] },
       );
 
       auto.addListener("place_changed", () => {

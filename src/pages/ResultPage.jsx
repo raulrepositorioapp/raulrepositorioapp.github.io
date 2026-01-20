@@ -5,7 +5,7 @@ import React from "react";
 export default function ResultPage() {
   return (
     <div className="p-10">
-      <ResultPageTopSection />
+      {/* <ResultPageTopSection /> */}
 
       <EVRouteTable />
     </div>

@@ -57,7 +57,7 @@ export default function EVRouteTable() {
   };
 
   return (
-    <div className=" bg-white rounded-lg mt-8 border p-8">
+    <div className=" bg-white rounded-lg border p-8">
       <div className="">
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
