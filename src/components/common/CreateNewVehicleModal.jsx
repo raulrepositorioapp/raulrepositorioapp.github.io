@@ -21,11 +21,9 @@ export default function CreateNewVehicleModal({ onClose }) {
     defaultValues: {
       vehicleName: "",
       vehicleType: "",
-      powerKW: "",
       weightKg: "",
       frontalArea: "",
       dragCoefficient: "",
-      estimatedRange: "",
       regenerationEfficiency: "",
       nominalBatteryCapacity: "",
       usableBatteryCapacity: "",
@@ -33,6 +31,11 @@ export default function CreateNewVehicleModal({ onClose }) {
       maxChargeCurrent: "",
       upperSOC: "",
       lowerSOC: "",
+      maxRegenPowerKW: "",
+      crr: "",
+      krot: "",
+      motorEfficiency: "",
+      auxiliaryPowerKW: "",
       vehiclePhoto: undefined,
     },
   });
@@ -54,11 +57,9 @@ export default function CreateNewVehicleModal({ onClose }) {
           const fieldMap = {
             name: "vehicleName",
             vehicle_type: "vehicleType",
-            power_kw: "powerKW",
             weight_kg: "weightKg",
             frontal_area_m2: "frontalArea",
             drag_coefficient: "dragCoefficient",
-            estimated_range_km: "estimatedRange",
             regeneration_efficiency: "regenerationEfficiency",
             nominal_battery_capacity_kwh: "nominalBatteryCapacity",
             usable_battery_capacity_kwh: "usableBatteryCapacity",
@@ -66,6 +67,13 @@ export default function CreateNewVehicleModal({ onClose }) {
             max_charge_discharge_current_a: "maxChargeCurrent",
             upper_soc_limit: "upperSOC",
             lower_soc_limit: "lowerSOC",
+
+            max_regen_power_kw: "maxRegenPowerKW",
+            crr: "crr",
+            krot: "krot",
+            motor_efficiency: "motorEfficiency",
+            auxiliary_power_kw: "auxiliaryPowerKW",
+
             photo: "vehiclePhoto",
           };
 
@@ -96,30 +104,35 @@ export default function CreateNewVehicleModal({ onClose }) {
     const submittedData = new FormData();
     submittedData.append("name", data.vehicleName);
     submittedData.append("vehicle_type", data.vehicleType);
-    submittedData.append("power_kw", data.powerKW);
     submittedData.append("weight_kg", data.weightKg);
     submittedData.append("frontal_area_m2", data.frontalArea);
     submittedData.append("drag_coefficient", data.dragCoefficient);
-    submittedData.append("estimated_range_km", data.estimatedRange);
     submittedData.append(
       "regeneration_efficiency",
-      data.regenerationEfficiency
+      data.regenerationEfficiency,
     );
     submittedData.append(
       "nominal_battery_capacity_kwh",
-      data.nominalBatteryCapacity
+      data.nominalBatteryCapacity,
     );
     submittedData.append(
       "usable_battery_capacity_kwh",
-      data.usableBatteryCapacity
+      data.usableBatteryCapacity,
     );
     submittedData.append("nominal_voltage_v", data.nominalVoltage);
     submittedData.append(
       "max_charge_discharge_current_a",
-      data.maxChargeCurrent
+      data.maxChargeCurrent,
     );
     submittedData.append("upper_soc_limit", data.upperSOC);
     submittedData.append("lower_soc_limit", data.lowerSOC);
+
+    submittedData.append("max_regen_power_kw", data.maxRegenPowerKW);
+    submittedData.append("crr", data.crr);
+    submittedData.append("krot", data.krot);
+    submittedData.append("motor_efficiency", data.motorEfficiency);
+    submittedData.append("auxiliary_power_kw", data.auxiliaryPowerKW);
+
     if (file) {
       submittedData.append("photo", file);
     }
@@ -206,24 +219,6 @@ export default function CreateNewVehicleModal({ onClose }) {
                 )}
               </div>
 
-              {/* Rest of the fields remain the same */}
-              <div>
-                <input
-                  {...register("powerKW", { required: "Power is required" })}
-                  placeholder="Power (KW)"
-                  type="number"
-                  step="0.1"
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.powerKW ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-                {errors.powerKW && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.powerKW.message}
-                  </p>
-                )}
-              </div>
-
               <div>
                 <input
                   {...register("weightKg", { required: "Weight is required" })}
@@ -282,24 +277,6 @@ export default function CreateNewVehicleModal({ onClose }) {
 
               <div>
                 <input
-                  {...register("estimatedRange", {
-                    required: "Estimated range is required",
-                  })}
-                  placeholder="Estimated Range (km)"
-                  type="number"
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.estimatedRange ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-                {errors.estimatedRange && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.estimatedRange.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <input
                   {...register("regenerationEfficiency", {
                     required: "Regeneration efficiency is required",
                   })}
@@ -317,6 +294,83 @@ export default function CreateNewVehicleModal({ onClose }) {
                     {errors.regenerationEfficiency.message}
                   </p>
                 )}
+              </div>
+
+              <div>
+                <input
+                  {...register("maxRegenPowerKW", {
+                    required: "Max regen power is required",
+                  })}
+                  placeholder="Max Regenerative Power (kW)"
+                  type="number"
+                  step="0.1"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.maxRegenPowerKW
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                />
+                {errors.maxRegenPowerKW && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.maxRegenPowerKW.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  {...register("crr", { required: "CRR is required" })}
+                  placeholder="Rolling Resistance Coefficient (CRR)"
+                  type="number"
+                  step="0.0001"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.crr ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+              </div>
+
+              <div>
+                <input
+                  {...register("krot", { required: "Krot is required" })}
+                  placeholder="Rotational Loss Coefficient (Krot)"
+                  type="number"
+                  step="0.0001"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.krot ? "border-red-500" : "border-gray-300"
+                  }`}
+                />
+              </div>
+
+              <div>
+                <input
+                  {...register("motorEfficiency", {
+                    required: "Motor efficiency is required",
+                  })}
+                  placeholder="Motor Efficiency (%)"
+                  type="number"
+                  step="0.1"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.motorEfficiency
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                />
+              </div>
+
+              <div>
+                <input
+                  {...register("auxiliaryPowerKW", {
+                    required: "Auxiliary power is required",
+                  })}
+                  placeholder="Auxiliary Power (kW)"
+                  type="number"
+                  step="0.1"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.auxiliaryPowerKW
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                />
               </div>
             </div>
           </div>

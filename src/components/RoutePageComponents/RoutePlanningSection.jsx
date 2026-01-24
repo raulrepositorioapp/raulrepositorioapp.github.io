@@ -1,4 +1,11 @@
-import { BatteryFull, Car, MapPin, MoveRightIcon, Send } from "lucide-react";
+import {
+  BatteryFull,
+  Car,
+  Gauge,
+  MapPin,
+  MoveRightIcon,
+  Send,
+} from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import CurvedArrowSVG from "../SVG/CurvedArrowSVG";
 import { Slider } from "../ui/slider";
@@ -34,6 +41,7 @@ export default function RoutePlanningSection({
   const [sliderValues, setSliderValues] = useState({
     startingCharge: 80,
     minArrivalCharge: 50,
+    minRouteSOC: 50,
   });
 
   // React Hook Form
@@ -226,10 +234,12 @@ export default function RoutePlanningSection({
 
     const submissionData = {
       vehicle_id: vehicleData?.id,
-      origin: data.origin,
-      destination: data.destination,
-      start_soc: sliderValues.startingCharge,
-      min_arrival_soc: sliderValues.minArrivalCharge,
+      origin: data?.origin,
+      destination: data?.destination,
+      start_soc: sliderValues?.startingCharge,
+      min_arrival_soc: sliderValues?.minArrivalCharge,
+      speed_kmh: data?.speed,
+      min_route_soc: sliderValues?.minRouteSOC,
     };
 
     calculateRoute(submissionData);
@@ -319,6 +329,25 @@ export default function RoutePlanningSection({
         {/* Battery Constraints */}
         <div className="my-6 border p-3 rounded-lg">
           <h1 className="title flex items-center gap-2">
+            <Car strokeWidth={1.5} /> Speed
+          </h1>
+
+          <div className="mt-6">
+            <div className="flex items-center text-base bg-white border border-gray-500/30 rounded-lg p-3 mt-2">
+              <Gauge strokeWidth={1.5} className="text-[#637381] mr-3" />
+              <input
+                {...register("speed", { required: true })}
+                className="outline-none text-gray-500 bg-transparent w-full"
+                type="number"
+                placeholder="Enter speed in km/h"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Battery Constraints */}
+        <div className="my-6 border p-3 rounded-lg">
+          <h1 className="title flex items-center gap-2">
             <BatteryFull strokeWidth={1.5} /> Battery Constraints
           </h1>
 
@@ -352,6 +381,23 @@ export default function RoutePlanningSection({
               />
               <span translate="no" className="w-[5ch]">
                 {sliderValues.minArrivalCharge}%
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <h1 className="title2 font-medium">Min. Route SOC</h1>
+            <div className="mt-4 flex items-center gap-2">
+              <Slider
+                value={[sliderValues.minRouteSOC]}
+                max={100}
+                step={1}
+                onValueChange={(value) =>
+                  handleSliderChange(value, "minRouteSOC")
+                }
+              />
+              <span translate="no" className="w-[5ch]">
+                {sliderValues.minRouteSOC}%
               </span>
             </div>
           </div>
