@@ -25,7 +25,7 @@ export default function RouteAnalysisResultsTopSection({
       title: "Energy Consumed",
       value: analysisData?.energy_kwh,
       unit: "kWh",
-      extraInfo: `Avg. ${analysisData?.avg_consumption_wh_per_km + " per km"}`,
+      extraInfo: `Avg. ${analysisData?.avg_consumption_wh_per_km + " Wh per km"}`,
       icon: BatteryCharging,
     },
     {

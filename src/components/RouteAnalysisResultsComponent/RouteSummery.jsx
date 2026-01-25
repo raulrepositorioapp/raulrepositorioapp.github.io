@@ -135,16 +135,6 @@ export default function RouteSummary({ vehicle_summary, route_summary }) {
           </div>
         </div>
       </div>
-
-      {/* Weather & Wind Impact */}
-      <div className="border p-4 rounded-2xl">
-        <h2 className="title mb-3">Weather & Wind Impact</h2>
-        <p className="paragraph">
-          Current conditions are optimal. No significant headwind or temperature
-          effects on battery performance. Energy consumption estimates are based
-          on standard conditions (20°C, 0 m/s wind).
-        </p>
-      </div>
     </div>
   );
 }

@@ -79,7 +79,9 @@ export default function EnergyProfileElevationChart({ elevationData }) {
             Elevation: <strong>{payload[0]?.value} m</strong>
           </span>
 
-          <span className="text-green-600 font-medium">Battery</span>
+          <span className="text-green-600 font-medium">
+            Relative energy demand (%)
+          </span>
           <span className="text-gray-800">
             <strong>{payload[1]?.value}%</strong>
           </span>
@@ -92,10 +94,13 @@ export default function EnergyProfileElevationChart({ elevationData }) {
     <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 shadow-sm">
       <div className="mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Energy Profile & Elevation
+          Relative energy demand vs. route elevation
         </h2>
         <p className="text-gray-600 mt-3">
-          Projected battery consumption vs route elevation
+          Relative energy demand shows the vehicle’s energy effort as a function
+          of the route profile. It is a normalized percentage value and does not
+          represent the actual battery state, nor does it assume recharging
+          during the trip.
         </p>
       </div>
 

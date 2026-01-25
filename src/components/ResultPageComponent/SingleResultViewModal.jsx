@@ -61,7 +61,7 @@ export default function SingleResultViewModal({ itemData, onClose }) {
 
   const formatDistance = (km) => {
     const miles = (km * 0.621371).toFixed(2);
-    return `${km.toFixed(2)} km (${miles} mi)`;
+    return `${km.toFixed(2)} km`;
   };
 
   return (
@@ -90,7 +90,7 @@ export default function SingleResultViewModal({ itemData, onClose }) {
             <div className="flex items-center justify-between mb-8">
               <div
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${getStatusColor(
-                  singleHistoryDetails?.status
+                  singleHistoryDetails?.status,
                 )}`}
               >
                 {getStatusIcon(singleHistoryDetails?.status)}

@@ -6,7 +6,7 @@ export default function ChargingStops({ ChargingStops }) {
     <div className="w-full bg-white p-6 rounded-lg border">
       <div className="flex items-center gap-2 mb-4">
         <PiChargingStationLight size={26} className="text-gray-600" />
-        <h2 className="title">Charging Stops</h2>
+        <h2 className="title">Stops</h2>
       </div>
 
       <div className="w-full h-full space-y-4">

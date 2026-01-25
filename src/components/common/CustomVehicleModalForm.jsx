@@ -7,19 +7,20 @@ import { useQueryClient } from "@tanstack/react-query";
 import useUpdateDefaultVehicles from "@/hooks/Vehicles/useUpdateDefaultVehicles";
 
 export default function CustomVehicleModalForm({ onClose, vehicle }) {
-  // COMMON STATES
   const queryClient = useQueryClient();
 
-  // REACT HOOK FORM
   const { register, handleSubmit, watch } = useForm({
     defaultValues: {
       vehicleName: vehicle?.name || "",
       vehicleType: vehicle?.vehicle_type || "",
-      powerKW: vehicle?.power_kw || 0,
+      maxRegenPowerKW: vehicle?.max_regen_power_kw || 0,
+      crr: vehicle?.crr || 0,
+      krot: vehicle?.krot || 0,
+      motorEfficiency: vehicle?.motor_efficiency || 0,
+      auxiliaryPowerKW: vehicle?.auxiliary_power_kw || 0,
       weightKg: vehicle?.weight_kg || 0,
       frontalArea: vehicle?.frontal_area_m2 || 0,
       dragCoefficient: vehicle?.drag_coefficient || 0,
-      estimatedRange: vehicle?.estimated_range_km || 0,
       regenerationEfficiency: vehicle?.regeneration_efficiency || 0,
       nominalBatteryCapacity: vehicle?.nominal_battery_capacity_kwh || 0,
       usableBatteryCapacity: vehicle?.usable_battery_capacity_kwh || 0,
@@ -31,7 +32,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
     },
   });
 
-  // UPDATE EXISTING VEHICLE MUTATION
   const { mutate: updateVehicle, isPending: isUpdatingVehiclePending } =
     useUpdateExistingVehicle({
       vehicleId: vehicle?.id,
@@ -46,7 +46,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
       },
     });
 
-  // UPDATE DEFAULT VEHICLE MUTATION
   const {
     mutate: updateDefaultVehicle,
     isPending: isUpdatingDefaultVehiclePending,
@@ -63,23 +62,25 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
     },
   });
 
-  // Form Submit Handler
   const onSubmit = (data) => {
     const submittedData = {
-      name: data?.vehicleName,
-      vehicle_type: data?.vehicleType,
-      power_kw: data?.powerKW,
-      weight_kg: data?.weightKg,
-      frontal_area_m2: data?.frontalArea,
-      drag_coefficient: data?.dragCoefficient,
-      estimated_range_km: data?.estimatedRange,
-      regeneration_efficiency: data?.regenerationEfficiency,
-      nominal_battery_capacity_kwh: data?.nominalBatteryCapacity,
-      usable_battery_capacity_kwh: data?.usableBatteryCapacity,
-      nominal_voltage_v: data?.nominalVoltage,
-      max_charge_discharge_current_a: data?.maxChargeCurrent,
-      upper_soc_limit: data?.upperSOC,
-      lower_soc_limit: data?.lowerSOC,
+      name: data.vehicleName,
+      vehicle_type: data.vehicleType,
+      max_regen_power_kw: data.maxRegenPowerKW,
+      crr: data.crr,
+      krot: data.krot,
+      motor_efficiency: data.motorEfficiency,
+      auxiliary_power_kw: data.auxiliaryPowerKW,
+      weight_kg: data.weightKg,
+      frontal_area_m2: data.frontalArea,
+      drag_coefficient: data.dragCoefficient,
+      regeneration_efficiency: data.regenerationEfficiency,
+      nominal_battery_capacity_kwh: data.nominalBatteryCapacity,
+      usable_battery_capacity_kwh: data.usableBatteryCapacity,
+      nominal_voltage_v: data.nominalVoltage,
+      max_charge_discharge_current_a: data.maxChargeCurrent,
+      upper_soc_limit: data.upperSOC,
+      lower_soc_limit: data.lowerSOC,
     };
 
     vehicle?.is_default
@@ -93,7 +94,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
   const hasFile = uploadedFile && uploadedFile.length > 0;
   const hasTextInput = Object.entries(formValues).some(([key, value]) => {
     if (key === "vehiclePhoto") return false;
-    return value && value !== "";
+    return value !== "" && value !== null;
   });
 
   const isFormFilled = hasFile || hasTextInput;
@@ -118,7 +119,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-8">
-          {/* Vehicle Parameters */}
           <div className="border rounded-xl p-6">
             <h3 className="text-lg font-semibold mb-4">Vehicle Parameters</h3>
 
@@ -128,24 +128,41 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 placeholder="Vehicle Name"
                 className="border rounded-lg p-3 text-sm"
               />
-              {/* Vehicle Type Select */}
-              <div>
-                <select
-                  {...register("vehicleType", {
-                    required: "Vehicle type is required",
-                  })}
-                  className={`border rounded-lg p-3 text-sm w-full border-gray-300`}
-                >
-                  {vehicleTypeOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+
+              <select
+                {...register("vehicleType")}
+                className="border rounded-lg p-3 text-sm w-full border-gray-300"
+              >
+                {vehicleTypeOptions.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+
               <input
-                {...register("powerKW")}
-                placeholder="Power (KW)"
+                {...register("maxRegenPowerKW")}
+                placeholder="Max Regen Power (kW)"
+                className="border rounded-lg p-3 text-sm"
+              />
+              <input
+                {...register("crr")}
+                placeholder="CRR"
+                className="border rounded-lg p-3 text-sm"
+              />
+              <input
+                {...register("krot")}
+                placeholder="KROT"
+                className="border rounded-lg p-3 text-sm"
+              />
+              <input
+                {...register("motorEfficiency")}
+                placeholder="Motor Efficiency"
+                className="border rounded-lg p-3 text-sm"
+              />
+              <input
+                {...register("auxiliaryPowerKW")}
+                placeholder="Auxiliary Power (kW)"
                 className="border rounded-lg p-3 text-sm"
               />
               <input
@@ -164,11 +181,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 className="border rounded-lg p-3 text-sm"
               />
               <input
-                {...register("estimatedRange")}
-                placeholder="Estimated Range (km)"
-                className="border rounded-lg p-3 text-sm"
-              />
-              <input
                 {...register("regenerationEfficiency")}
                 placeholder="Regeneration Efficiency (%)"
                 className="border rounded-lg p-3 text-sm"
@@ -176,7 +188,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
             </div>
           </div>
 
-          {/* Battery */}
           <div className="border rounded-xl p-6">
             <h3 className="text-lg font-semibold mb-4">Battery</h3>
 
@@ -214,7 +225,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
             </div>
           </div>
 
-          {/* Actions */}
           <div className="flex justify-end gap-3">
             <button
               type="button"

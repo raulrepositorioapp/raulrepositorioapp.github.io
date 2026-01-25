@@ -103,9 +103,9 @@ export default function VehicleCard() {
 
                   <div className="flex justify-between gap-4 mb-4">
                     <SpecItem
-                      label="Power"
-                      value={vehicle?.power_kw}
-                      type="KW"
+                      label="Motor Efficiency"
+                      value={vehicle?.motor_efficiency}
+                      type=""
                     />
                     <SpecItem
                       label="Weight"

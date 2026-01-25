@@ -68,7 +68,7 @@ export default function Sidebar() {
           <div className="size-7">
             <ResultIconSVG />
           </div>
-          History
+          Trip History
         </NavLink>
       </div>
     </div>

@@ -41,7 +41,7 @@ export default function RoutePlanningSection({
   const [sliderValues, setSliderValues] = useState({
     startingCharge: 80,
     minArrivalCharge: 50,
-    minRouteSOC: 50,
+    minRouteSOC: 20,
   });
 
   // React Hook Form
@@ -416,9 +416,9 @@ export default function RoutePlanningSection({
                 <span className="text-[#637381]">{vehicleData?.name}</span>
               </h1>
               <h1 className="title2">
-                Power:{" "}
+                Motor Efficiency:{" "}
                 <span className="text-[#637381]">
-                  {vehicleData?.power_kw} KWh
+                  {vehicleData?.motor_efficiency}
                 </span>
               </h1>
               <h1 className="title2">
