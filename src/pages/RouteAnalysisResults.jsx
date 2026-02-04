@@ -23,7 +23,6 @@ export default function RouteAnalysisResults() {
         />
 
         <RouteSummery
-          vehicle_summary={analysisData?.vehicle_summary}
           route_summary={analysisData?.route_summary}
           averageSpeed={analysisData?.summary_cards?.avg_speed_kmh}
         />

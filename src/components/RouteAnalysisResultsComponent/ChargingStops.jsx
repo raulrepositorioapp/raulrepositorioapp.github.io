@@ -15,9 +15,7 @@ export default function ChargingStops({ ChargingStops }) {
             key={index}
             className="rounded-xl border p-4 bg-[#F1FAF7] flex flex-col gap-2"
           >
-            <p className="font-semibold text-gray-800">
-              Station name: {item?.name}
-            </p>
+            <p className="font-semibold text-gray-800">Name: {item?.name}</p>
 
             <div className="flex items-start justify-between text-sm text-gray-700">
               <div>
@@ -28,7 +26,10 @@ export default function ChargingStops({ ChargingStops }) {
               </div>
 
               <div className="text-right">
-                <p>Distance: {item?.distance_from_route_km.toFixed(2)} km</p>
+                <p>
+                  Distance from the initial route polyline:{" "}
+                  {item?.distance_from_route_km.toFixed(2)} km
+                </p>
                 <p>Charging Time: {item?.charge_time_min} min</p>
               </div>
             </div>

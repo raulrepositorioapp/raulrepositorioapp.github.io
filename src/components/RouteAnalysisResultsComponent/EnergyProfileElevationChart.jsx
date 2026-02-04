@@ -23,11 +23,9 @@ export default function EnergyProfileElevationChart({ elevationData }) {
       ];
     }
 
-    // If we have fewer or equal points than MAX_POINTS → use all
     if (elevationData.length <= MAX_POINTS) {
       return elevationData.map((point) => ({
         distance: Math.round(point.x_km),
-        // Use real elevation if available, otherwise simple fallback
         elevation: Math.round(
           point.elevation ?? 20 + point.soc * 0.6 + (point.x_km % 80) * 0.3,
         ),
@@ -35,7 +33,6 @@ export default function EnergyProfileElevationChart({ elevationData }) {
       }));
     }
 
-    // Downsample to MAX_POINTS while trying to preserve overall shape
     const step = Math.floor(elevationData.length / (MAX_POINTS - 1));
     const sampled = [];
 
@@ -51,7 +48,6 @@ export default function EnergyProfileElevationChart({ elevationData }) {
       });
     }
 
-    // Always include the very last point
     const last = elevationData[elevationData.length - 1];
     sampled.push({
       distance: Math.round(last.x_km),
@@ -76,11 +72,11 @@ export default function EnergyProfileElevationChart({ elevationData }) {
         <div className="grid grid-cols-[auto,1fr] gap-x-4 gap-y-2">
           <span className="text-blue-600 font-medium">↑</span>
           <span className="text-gray-800">
-            Elevation: <strong>{payload[0]?.value} m</strong>
+            Elevación: <strong>{payload[0]?.value} m</strong>
           </span>
 
           <span className="text-green-600 font-medium">
-            Relative energy demand (%)
+            Demanda energética relativa (%)
           </span>
           <span className="text-gray-800">
             <strong>{payload[1]?.value}%</strong>
@@ -104,7 +100,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
         </p>
       </div>
 
-      <div className="w-full" style={{ height: 420 }}>
+      <div className="w-full" style={{ height: 380 }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
@@ -130,7 +126,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
             <XAxis
               dataKey="distance"
               label={{
-                value: "Distance (km)",
+                value: "Distancia (km)",
                 position: "insideBottom",
                 offset: -5,
                 dy: 20,
@@ -146,12 +142,11 @@ export default function EnergyProfileElevationChart({ elevationData }) {
               domain={[0, 100]}
               tick={{ fill: "#27ae60", fontSize: 12 }}
               label={{
-                value: "Battery %",
+                value: "Demanda energética relativa (%)",
                 angle: -90,
                 position: "insideLeft",
                 fill: "#27ae60",
-                offset: 0,
-                dy: -10,
+                dy: 90,
                 fontSize: 13,
               }}
               axisLine={false}
@@ -164,11 +159,10 @@ export default function EnergyProfileElevationChart({ elevationData }) {
               domain={[0, "dataMax + 40"]}
               tick={{ fill: "#2980b9", fontSize: 12 }}
               label={{
-                value: "Elevation (m)",
+                value: "Elevación (m)",
                 angle: 90,
                 position: "insideRight",
                 fill: "#2980b9",
-                offset: 0,
                 dy: -15,
                 fontSize: 13,
               }}
@@ -182,7 +176,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
               yAxisId="right"
               type="monotone"
               dataKey="elevation"
-              name="Elevation"
+              name="Elevación"
               stroke="#2980b9"
               strokeWidth={2.8}
               fill="url(#elevationGrad)"
@@ -193,7 +187,7 @@ export default function EnergyProfileElevationChart({ elevationData }) {
               yAxisId="left"
               type="monotone"
               dataKey="battery"
-              name="Battery"
+              name="Demanda energética relativa"
               stroke="#27ae60"
               strokeWidth={2.8}
               fill="url(#batteryGrad)"
@@ -205,7 +199,11 @@ export default function EnergyProfileElevationChart({ elevationData }) {
               height={45}
               iconType="plainline"
               iconSize={16}
-              wrapperStyle={{ fontSize: 13, color: "#4b5563", paddingTop: 8 }}
+              wrapperStyle={{
+                fontSize: 13,
+                color: "#4b5563",
+                paddingTop: 8,
+              }}
             />
           </AreaChart>
         </ResponsiveContainer>

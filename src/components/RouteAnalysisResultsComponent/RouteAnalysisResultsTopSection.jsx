@@ -32,7 +32,8 @@ export default function RouteAnalysisResultsTopSection({
       id: 3,
       title: "Trip Duration",
       value: analysisData?.trip_duration_min + " min",
-      extraInfo: `Includes ${analysisData?.charging_stop_count} charging stops`,
+      extraInfo: `Driving time only`,
+      // extraInfo: `Includes ${analysisData?.charging_stop_count} charging stops`,
       icon: Clock,
     },
     {
