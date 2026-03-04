@@ -1,8 +1,8 @@
 import ChargingStops from "@/components/RouteAnalysisResultsComponent/ChargingStops";
 import EnergyProfileElevationChart from "@/components/RouteAnalysisResultsComponent/EnergyProfileElevationChart";
-import PowerConsumptionBreakdownChart from "@/components/RouteAnalysisResultsComponent/PowerConsumptionBreakdownChart";
 import RouteAnalysisResultsTopSection from "@/components/RouteAnalysisResultsComponent/RouteAnalysisResultsTopSection";
 import RouteSummery from "@/components/RouteAnalysisResultsComponent/RouteSummery";
+import RouteMapSection from "@/components/RoutePageComponents/RouteMapSection";
 import React from "react";
 import { useLocation } from "react-router-dom";
 
@@ -30,9 +30,11 @@ export default function RouteAnalysisResults() {
       <div className="grid grid-cols-2 mt-6 gap-6">
         <ChargingStops ChargingStops={analysisData?.charging_stops} />
 
-        <PowerConsumptionBreakdownChart
-          powerBreakdown={analysisData?.power_breakdown_chart}
-        />
+        {/* <div>
+          <RouteMapSection
+            locationCoordinates={analysisData?.route_summary?.route_path}
+          />
+        </div> */}
       </div>
     </div>
   );
