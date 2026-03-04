@@ -9,8 +9,6 @@ import RouteAnalysisResults from "@/pages/RouteAnalysisResults";
 import AuthLayout from "@/layout/AuthLayout";
 import LoginPage from "@/pages/AuthPages/LoginPage";
 import RegisterPage from "@/pages/AuthPages/RegisterPage";
-import RegisterOTPVerify from "@/pages/AuthPages/RegisterOTPVerify";
-import RegisterSuccessPage from "@/pages/AuthPages/RegisterSuccessPage";
 
 const router = createBrowserRouter([
   {
@@ -33,14 +31,6 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterPage />,
-      },
-      {
-        path: "otp-verify",
-        element: <RegisterOTPVerify />,
-      },
-      {
-        path: "register-success",
-        element: <RegisterSuccessPage />,
       },
     ],
   },

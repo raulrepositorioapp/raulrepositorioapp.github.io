@@ -21,14 +21,14 @@ export default function RegisterPage() {
 
   const { mutate: registerUser, isPending: isRegisterPending } = useRegister({
     onSuccess: (data) => {
-      toast.success("Registration successful!");
+      toast.success("¡Registro exitoso!");
 
       setTimeout(() => {
         navigate("/auth/login");
       }, 1000);
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message || "Something went wrong!!!");
+      toast.error(err?.response?.data?.message || "¡Algo salió mal!");
       console.log(err);
     },
   });
@@ -48,13 +48,13 @@ export default function RegisterPage() {
     <div className="w-full max-w-[600px] py-6 flex flex-col gap-10">
       <div>
         <h1 className="text-[#212B36] text-[40px] font-semibold font-roboto">
-          Create an account
+          Crear una cuenta
         </h1>
 
         <p className="text-[#637381] text-lg mt-4">
-          Already have an account?{" "}
+          ¿Ya tienes una cuenta?{" "}
           <Link to={"/auth/login"} className="text-primary">
-            Log in
+            Inicia sesión
           </Link>
         </p>
       </div>
@@ -64,11 +64,11 @@ export default function RegisterPage() {
           {/* Email Input */}
           <div>
             <label className="text-[#212B36] text-lg font-medium font-roboto">
-              Email Address*
+              Dirección de correo electrónico*
             </label>
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Correo electrónico"
               className={`w-full px-4 py-3.5 border rounded mt-2 focus-visible:outline-primary ${
                 errors.email ? "border-red-500" : "border-[#D5DAE1]"
               }`}
@@ -79,11 +79,11 @@ export default function RegisterPage() {
           {/* Password Input */}
           <div className="mt-5">
             <label className="text-[#212B36] text-lg font-medium font-roboto">
-              Password*
+              Contraseña*
             </label>
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               className={`w-full px-4 py-3.5 border rounded mt-2 focus-visible:outline-none focus-visible:border-primary ${
                 errors?.password ? "border-red-500" : "border-[#D5DAE1]"
               }`}
@@ -94,11 +94,11 @@ export default function RegisterPage() {
           {/* Password Confirm Input */}
           <div className="mt-5">
             <label className="text-[#212B36] text-lg font-medium font-roboto">
-              Confirm Password*
+              Confirmar contraseña*
             </label>
             <input
               type="password"
-              placeholder="Confirm password"
+              placeholder="Confirmar contraseña"
               className={`w-full px-4 py-3.5 border rounded mt-2 focus-visible:outline-none focus-visible:border-primary ${
                 errors?.passwordConfirm ? "border-red-500" : "border-[#D5DAE1]"
               }`}
@@ -114,13 +114,13 @@ export default function RegisterPage() {
               {...register("terms", { required: true })}
             />
             <span className="text-[#637381] text-lg font-roboto">
-              I agree to the{" "}
+              Estoy de acuerdo con los{" "}
               <Link
                 to="/"
                 className="text-primary"
                 onClick={(e) => e.stopPropagation()}
               >
-                Terms & Conditions
+                Términos y Condiciones
               </Link>
             </span>
           </label>
@@ -136,7 +136,7 @@ export default function RegisterPage() {
                   : "hover:bg-primary/90"
               }`}
             >
-              Create Account
+              Crear cuenta
             </button>
           </div>
         </form>

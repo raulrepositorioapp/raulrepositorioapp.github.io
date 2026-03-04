@@ -24,14 +24,14 @@ export default function LoginPage() {
     onSuccess: (data) => {
       dispatch(userToken(data?.data));
 
-      toast.success(data?.message || "Login Successful!");
+      toast.success(data?.message || "Inicio de sesión exitoso!");
 
       setTimeout(() => {
         navigate("/");
       }, 500);
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message || "Something went wrong!");
+      toast.error(err?.response?.data?.message || "¡Algo salió mal!");
       console.log(err);
     },
   });
@@ -45,13 +45,13 @@ export default function LoginPage() {
     <div className="w-full max-w-[600px] py-6 flex flex-col gap-10">
       <div>
         <h1 className="text-[#212B36] text-[40px] font-semibold font-roboto">
-          Login to your account
+          Inicie sesión en su cuenta.
         </h1>
 
         <p className="text-[#637381] text-lg mt-4">
-          Dont’t have an account?{" "}
+          ¿No tienes una cuenta?{" "}
           <Link to={"/auth/register"} className="text-primary">
-            Sign up
+            Regístrate
           </Link>
         </p>
       </div>
@@ -61,11 +61,11 @@ export default function LoginPage() {
           {/* Email Input */}
           <div>
             <label className="text-[#212B36] text-lg font-medium font-roboto">
-              Email Address*
+              Dirección de correo electrónico*
             </label>
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Correo electrónico"
               className={`w-full px-4 py-3.5 border rounded mt-2 focus-visible:outline-primary ${
                 errors.email ? "border-red-500" : "border-[#D5DAE1]"
               }`}
@@ -76,11 +76,11 @@ export default function LoginPage() {
           {/* Password Input */}
           <div className="mt-5">
             <label className="text-[#212B36] text-lg font-medium font-roboto">
-              Password*
+              Contraseña*
             </label>
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               className={`w-full px-4 py-3.5 border rounded mt-2 focus-visible:outline-none focus-visible:border-primary ${
                 errors.password ? "border-red-500" : "border-[#D5DAE1]"
               }`}
@@ -94,7 +94,7 @@ export default function LoginPage() {
               to="#"
               className="text-primary text-lg font-medium font-roboto"
             >
-              Forget Password?
+              ¿Olvidaste tu contraseña?
             </Link>
           </div>
 
@@ -104,7 +104,7 @@ export default function LoginPage() {
               type="submit"
               className="w-full px-5 py-3 bg-primary rounded-xl text-white text-xl font-medium font-roboto mt-6 cursor-pointer hover:bg-primary/90 transition-all"
             >
-              Login
+              Iniciar sesión
             </button>
           </div>
         </form>
