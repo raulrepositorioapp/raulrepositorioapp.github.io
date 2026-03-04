@@ -48,18 +48,18 @@ export default function VehicleCard() {
       <div className="flex items-start justify-between mb-8">
         <div>
           <h2 className="text-2xl font-semibold text-gray-900">
-            Select Your Vehicle
+            Selecciona tu vehículo
           </h2>
           <p className="text-gray-600 mt-2">
-            Choose a preset model or create a custom configuration for your
-            simulation.
+            Elige un modelo predeterminado o crea una configuración
+            personalizada para tu simulación.
           </p>
         </div>
         <button
           onClick={() => setModalOpen(true)}
           className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-lg font-medium transition-colors"
         >
-          Create Custom Vehicle
+          Crear vehículo personalizado
         </button>
       </div>
 
@@ -135,7 +135,7 @@ export default function VehicleCard() {
                     className="w-full border text-gray-500 py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 hover:border-emerald-500 hover:text-emerald-500 duration-300 cursor-pointer"
                   >
                     <Wrench size={18} />
-                    Custom Vehicle
+                    Vehículo personalizado
                   </button>
                 </div>
               </div>
@@ -153,10 +153,11 @@ export default function VehicleCard() {
         <div className="w-full h-[300px] flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-semibold text-gray-900">
-              No Vehicles Found
+              No se encontraron vehículos
             </h1>
             <p className="text-gray-600 mt-2">
-              Create a custom vehicle or select a preset model.
+              Crea un vehículo personalizado o selecciona un modelo
+              preestablecido.
             </p>
           </div>
         </div>
@@ -166,28 +167,28 @@ export default function VehicleCard() {
       {selectedVehicle && (
         <div className="mt-8 bg-white p-6 rounded-2xl flex justify-between items-center">
           <div>
-            <h1 className="title">Environmental Constants</h1>
+            <h1 className="title">Constantes ambientales</h1>
             <div className="mt-1 flex items-center gap-4">
               <p className="Titel2">
-                Air Density:{" "}
+                Densidad del aire:{" "}
                 <span className="text-[#637381]!">
                   {constants?.air_density || 0} kg/m³
                 </span>
               </p>
               <p className="Titel2">
-                Gravity:{" "}
+                Gravedad:{" "}
                 <span className="text-[#637381]!">
                   {constants?.gravity || 0} m/s²
                 </span>
               </p>
               <p className="Titel2">
-                Temp:{" "}
+                Temperatura:{" "}
                 <span className="text-[#637381]!">
                   {constants?.temperature_c || 0}°C
                 </span>
               </p>
               <p className="Titel2">
-                Wind speed:{" "}
+                Velocidad del viento:{" "}
                 <span className="text-[#637381]!">
                   {constants?.wind_speed || 0} m/s
                 </span>
@@ -201,7 +202,7 @@ export default function VehicleCard() {
               variant="fill"
               className="mt-5 flex items-center border bg-transparent text-gray-500!"
             >
-              Cancel
+              Cancelar
             </CommonButton>
 
             <CommonButton
@@ -209,7 +210,7 @@ export default function VehicleCard() {
               state={selectedVehicle}
               className="mt-5 flex items-center"
             >
-              Continue to Route Planning <SlArrowRight />
+              Continuar con la planificación de ruta <SlArrowRight />
             </CommonButton>
           </div>
         </div>
