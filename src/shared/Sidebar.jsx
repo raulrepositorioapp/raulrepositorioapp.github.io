@@ -3,7 +3,6 @@ import Logo from "@/assets/Images/logo.png";
 import { NavLink } from "react-router-dom";
 import HomeIconSVG from "@/components/SVG/SidebarIcons/HomeIconSVG";
 import CarIconSVG from "@/components/SVG/SidebarIcons/CarIconSVG";
-import RoutingIconSVG from "@/components/SVG/SidebarIcons/RoutingIconSVG";
 import ResultIconSVG from "@/components/SVG/SidebarIcons/ResultIconSVG";
 
 export default function Sidebar() {
@@ -32,7 +31,7 @@ export default function Sidebar() {
           <div className="size-7">
             <HomeIconSVG />
           </div>
-          Home
+          Hogar
         </NavLink>
 
         <NavLink
@@ -44,20 +43,8 @@ export default function Sidebar() {
           <div className="size-7">
             <CarIconSVG />
           </div>
-          Vehicle
+          Vehículo
         </NavLink>
-
-        {/* <NavLink
-          to="/route"
-          className={({ isActive }) =>
-            isActive ? navActiveStyle : navStyleNormal
-          }
-        >
-          <div className="size-7">
-            <RoutingIconSVG />
-          </div>
-          Route
-        </NavLink> */}
 
         <NavLink
           to="/result"
@@ -68,7 +55,7 @@ export default function Sidebar() {
           <div className="size-7">
             <ResultIconSVG />
           </div>
-          Trip History
+          Historial de Viajes
         </NavLink>
       </div>
     </div>
