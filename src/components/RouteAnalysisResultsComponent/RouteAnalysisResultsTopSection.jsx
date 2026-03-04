@@ -1,118 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route, BatteryCharging, Clock, Gauge, TrendingUp } from "lucide-react";
 import CommonButton from "../common/CommonButton";
-import { IoIosArrowDown } from "react-icons/io";
-import usePdfExport from "@/hooks/Export/usePdfExport";
 import Loader from "../common/Loader";
 
 export default function RouteAnalysisResultsTopSection({
   analysisData,
   locationData,
-  tripId,
 }) {
   // History Analytics Data
   const data = [
     {
       id: 1,
-      title: "Total Distance",
+      title: "Distancia total",
       value: analysisData?.total_distance_km,
       unit: "km",
-      extraInfo: "Route Optimized for efficiency",
+      extraInfo: "Ruta optimizada para eficiencia",
       icon: Route,
     },
     {
       id: 2,
-      title: "Energy Consumed",
+      title: "Energía consumida",
       value: analysisData?.energy_kwh,
       unit: "kWh",
-      extraInfo: `Avg. ${analysisData?.avg_consumption_wh_per_km + " Wh per km"}`,
+      extraInfo: `Avg. ${analysisData?.avg_consumption_wh_per_km + " Wh por km"}`,
       icon: BatteryCharging,
     },
     {
       id: 3,
-      title: "Trip Duration",
+      title: "Duración del viaje",
       value: analysisData?.trip_duration_min + " min",
-      extraInfo: `Driving time only`,
-      // extraInfo: `Includes ${analysisData?.charging_stop_count} charging stops`,
+      extraInfo: `Solo tiempo de conducción`,
       icon: Clock,
     },
     {
       id: 4,
-      title: "Arrival SoC",
+      title: "SoC de llegada",
       value: analysisData?.arrival_soc + "%",
-      extraInfo: "Started at " + analysisData?.start_soc + "%",
+      extraInfo: "Comenzado en " + analysisData?.start_soc + "%",
       icon: Gauge,
     },
   ];
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("Export File");
-
-  const exportOptions = ["Export PDF"];
-
-  // PDF Download Hook
-  const [shouldDownload, setShouldDownload] = useState(false);
-  const { pdfExport, isPdfExportLoading } = usePdfExport({
-    id: tripId,
-  });
-
-  useEffect(() => {
-    if (shouldDownload && pdfExport?.download_url) {
-      window.open(pdfExport.download_url, "_blank", "noopener,noreferrer");
-      setShouldDownload(false);
-    }
-  }, [shouldDownload, pdfExport]);
-
-  const handleExportSelect = (country) => {
-    setSelected(country);
-    setIsOpen(false);
-    setShouldDownload(true);
-  };
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <div className="">
           <h1 className="text-[#212B36] font-roboto text-[32px] font-semibold leading-[38.4px]">
-            Route Analysis Results
+            Resultados del análisis de ruta
           </h1>
           <p className="paragraph mt-2">
-            {locationData?.origin} To {locationData?.destination}
+            {locationData?.origin} a {locationData?.destination}
           </p>
         </div>
 
         {/* button */}
         <div className="flex items-center gap-5">
-          <div className="flex flex-col w-44 text-sm relative">
-            <button
-              type="button"
-              onClick={() => setIsOpen(!isOpen)}
-              className="w-full text-left px-4 pr-2 py-2.5 rounded-lg border border-[#2FA75F] text-[#2FA75F] text-lg flex items-center justify-between cursor-pointer"
-            >
-              <span>{selected}</span>
-              <IoIosArrowDown
-                className={`w-5 h-5 inline float-right transition-transform duration-200 ${
-                  isOpen ? "rotate-0" : "-rotate-90"
-                }`}
-              />
-            </button>
-
-            {isOpen && (
-              <ul className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded shadow-md mt-1 py-2 z-50">
-                {exportOptions.map((option) => (
-                  <li
-                    key={option}
-                    className="px-4 py-2 hover:bg-[#2FA75F] hover:text-white cursor-pointer"
-                    onClick={() => handleExportSelect(option)}
-                  >
-                    {option}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          <CommonButton to="/result" children="Save & Close" />
+          <CommonButton to="/result" children="Guardar y cerrar" />
         </div>
       </div>
 
@@ -146,8 +89,6 @@ export default function RouteAnalysisResultsTopSection({
           </div>
         ))}
       </div>
-
-      {isPdfExportLoading && <Loader />}
     </div>
   );
 }
