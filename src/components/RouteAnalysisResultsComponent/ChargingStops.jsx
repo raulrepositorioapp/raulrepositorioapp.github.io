@@ -6,7 +6,7 @@ export default function ChargingStops({ ChargingStops }) {
     <div className="w-full bg-white p-6 rounded-lg border">
       <div className="flex items-center gap-2 mb-4">
         <PiChargingStationLight size={26} className="text-gray-600" />
-        <h2 className="title">Stops</h2>
+        <h2 className="title">Paradas</h2>
       </div>
 
       <div className="w-full h-full space-y-4">
@@ -15,22 +15,22 @@ export default function ChargingStops({ ChargingStops }) {
             key={index}
             className="rounded-xl border p-4 bg-[#F1FAF7] flex flex-col gap-2"
           >
-            <p className="font-semibold text-gray-800">Name: {item?.name}</p>
+            <p className="font-semibold text-gray-800">Nombre: {item?.name}</p>
 
             <div className="flex items-start justify-between text-sm text-gray-700">
               <div>
-                <p>Charger power: {item?.charger_power_kw} KW</p>
+                <p>Potencia del cargador: {item?.charger_power_kw} KW</p>
                 <p className="text-[#4CBF82] font-medium">
-                  Arrival Battery: {item?.arrival_soc}%
+                  Batería de llegada: {item?.arrival_soc}%
                 </p>
               </div>
 
               <div className="text-right">
                 <p>
-                  Distance from the initial route polyline:{" "}
+                  Distancia desde la polilínea de la ruta inicial:{" "}
                   {item?.distance_from_route_km.toFixed(2)} km
                 </p>
-                <p>Charging Time: {item?.charge_time_min} min</p>
+                <p>Tiempo de carga: {item?.charge_time_min} min</p>
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@ export default function ChargingStops({ ChargingStops }) {
 
         {ChargingStops?.length === 0 && (
           <div className="w-full h-full flex items-center justify-center text-lg font-medium">
-            No charging stops found.
+            No se encontraron paradas de carga.
           </div>
         )}
       </div>
