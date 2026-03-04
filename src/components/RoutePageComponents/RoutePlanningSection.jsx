@@ -257,19 +257,20 @@ export default function RoutePlanningSection({
     <div className="bg-white p-8 rounded-2xl border">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <h1 className="title">Route Planning</h1>
+          <h1 className="title">Planificación de ruta</h1>
           <p className="paragraph mt-2">
-            Enter your journey details and we'll calculate optimal charging stop
+            Ingrese los detalles de su viaje y calcularemos la parada de carga
+            óptima
           </p>
         </div>
 
         {/* Trip Details */}
         <div className="mt-6 border rounded-2xl p-4">
-          <h1 className="title">Trip Details</h1>
+          <h1 className="title">Detalles del viaje</h1>
 
           {/* Origin */}
           <div className="mt-4">
-            <h1 className="paragraph text-[#212B36]!">Origin</h1>
+            <h1 className="paragraph text-[#212B36]!">Origen</h1>
             <div className="flex items-center text-base bg-white border border-gray-500/30 rounded-lg p-3 mt-2">
               <MapPin strokeWidth={1.5} className="text-[#637381] mr-3" />
               <input
@@ -277,7 +278,7 @@ export default function RoutePlanningSection({
                 ref={originRef}
                 className="outline-none text-gray-500 bg-transparent w-full"
                 type="text"
-                placeholder="Enter your origin"
+                placeholder="Ingrese su origen"
               />
             </div>
             {/* {errors.origin && (
@@ -295,7 +296,7 @@ export default function RoutePlanningSection({
           {/* Destination */}
           <div className="mt-4">
             <div className="relative flex items-center">
-              <h1 className="paragraph text-[#212B36]!">Destination</h1>
+              <h1 className="paragraph text-[#212B36]!">Destino</h1>
               <div className="absolute left-1/2 top-1/2 -translate-y-1/2">
                 <CurvedArrowSVG />
               </div>
@@ -308,7 +309,7 @@ export default function RoutePlanningSection({
                 ref={destinationRef}
                 className="outline-none text-gray-500 bg-transparent w-full"
                 type="text"
-                placeholder="Enter your destination"
+                placeholder="Introduce tu destino"
               />
             </div>
             {/* {errors.destination && (
@@ -329,7 +330,7 @@ export default function RoutePlanningSection({
         {/* Battery Constraints */}
         <div className="my-6 border p-3 rounded-lg">
           <h1 className="title flex items-center gap-2">
-            <Car strokeWidth={1.5} /> Speed
+            <Car strokeWidth={1.5} /> Velocidad
           </h1>
 
           <div className="mt-6">
@@ -339,7 +340,7 @@ export default function RoutePlanningSection({
                 {...register("speed", { required: true })}
                 className="outline-none text-gray-500 bg-transparent w-full"
                 type="number"
-                placeholder="Enter speed in km/h"
+                placeholder="Introduzca la velocidad en km/h"
               />
             </div>
           </div>
@@ -348,11 +349,11 @@ export default function RoutePlanningSection({
         {/* Battery Constraints */}
         <div className="my-6 border p-3 rounded-lg">
           <h1 className="title flex items-center gap-2">
-            <BatteryFull strokeWidth={1.5} /> Battery Constraints
+            <BatteryFull strokeWidth={1.5} /> Restricciones de la batería
           </h1>
 
           <div className="mt-6">
-            <h1 className="title2 font-medium">Starting Charge</h1>
+            <h1 className="title2 font-medium">Carga inicial</h1>
             <div className="mt-4 flex items-center gap-2">
               <Slider
                 value={[sliderValues.startingCharge]}
@@ -369,7 +370,7 @@ export default function RoutePlanningSection({
           </div>
 
           <div className="mt-6">
-            <h1 className="title2 font-medium">Min. Arrival Charge</h1>
+            <h1 className="title2 font-medium">Carga mínima de llegada</h1>
             <div className="mt-4 flex items-center gap-2">
               <Slider
                 value={[sliderValues.minArrivalCharge]}
@@ -386,7 +387,7 @@ export default function RoutePlanningSection({
           </div>
 
           <div className="mt-6">
-            <h1 className="title2 font-medium">Min. Route SOC</h1>
+            <h1 className="title2 font-medium">SOC mínimo de ruta</h1>
             <div className="mt-4 flex items-center gap-2">
               <Slider
                 value={[sliderValues.minRouteSOC]}
@@ -406,23 +407,23 @@ export default function RoutePlanningSection({
         {/* Selected Vehicle */}
         <div className="bg-[#e5ecfa] p-3 rounded-lg">
           <h1 className="title text-black! flex items-center gap-2">
-            <Car size={30} strokeWidth={1} /> Selected Vehicle
+            <Car size={30} strokeWidth={1} /> Vehículo seleccionado
           </h1>
 
           <div className="mt-3 flex justify-between">
             <div className="space-y-2">
               <h1 className="title2">
-                Model:{" "}
+                Modelo:{" "}
                 <span className="text-[#637381]">{vehicleData?.name}</span>
               </h1>
               <h1 className="title2">
-                Motor Efficiency:{" "}
+                Eficiencia del motor:{" "}
                 <span className="text-[#637381]">
                   {vehicleData?.motor_efficiency}
                 </span>
               </h1>
               <h1 className="title2">
-                Battery:{" "}
+                Batería:{" "}
                 <span className="text-[#637381]">
                   {vehicleData?.nominal_battery_capacity_kwh} kWh
                 </span>
@@ -431,19 +432,19 @@ export default function RoutePlanningSection({
 
             <div className="space-y-2 text-end">
               <h1 className="title2">
-                Type:{" "}
+                Tipo:{" "}
                 <span className="text-[#637381] capitalize">
                   {vehicleData?.vehicle_type}
                 </span>
               </h1>
               <h1 className="title2">
-                Weight:{" "}
+                Peso:{" "}
                 <span className="text-[#637381]">
                   {vehicleData?.weight_kg} kg
                 </span>
               </h1>
               <h1 className="title2">
-                Frontal Area:{" "}
+                Área frontal:{" "}
                 <span className="text-[#637381]">
                   {vehicleData?.frontal_area_m2} m²
                 </span>
@@ -459,10 +460,10 @@ export default function RoutePlanningSection({
           disabled={isCalculatePending}
         >
           {isCalculatePending ? (
-            "Calculating..."
+            "Calculando..."
           ) : (
             <>
-              Calculate Route <MoveRightIcon />
+              Calcular ruta <MoveRightIcon />
             </>
           )}
         </CommonButton>
