@@ -22,22 +22,22 @@ export default function HomePage() {
       <div className="relative z-0 w-full max-w-[750px] mx-auto text-center">
         <div className="inline-flex items-center gap-5 px-5 py-2 rounded-full bg-[#1CA9A6]/12 mb-5">
           <span className="text-[#1CA9A6] text-sm font-medium">
-            Advanced EV Calculation Tool
+            Herramienta avanzada de cálculo de EV
           </span>
         </div>
 
         <h1 className="text-primary text-5xl font-semibold leading-[120%]">
-          Calculate route plans for using electric vehicles
+          Calcular planes de ruta para el uso de vehículos eléctricos
         </h1>
 
         <p className="text-secondary-black text-lg leading-[150%] mt-6">
-          Plan your electric vehicle journey with precision. Calculate battery
-          consumption, optimize routes, and find charging stations along the
-          way.
+          Planifica tu viaje en vehículo eléctrico con precisión. Calcula el
+          consumo de batería, optimiza las rutas y encuentra estaciones de carga
+          en el camino.
         </p>
 
         <CommonButton className="mt-6" to={`/vechile`}>
-          Start New Calculation
+          Iniciar nuevo cálculo
         </CommonButton>
       </div>
 

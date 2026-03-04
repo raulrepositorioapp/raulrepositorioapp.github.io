@@ -1,10 +1,9 @@
 import CommonButton from "@/components/common/CommonButton";
 import Loader from "@/components/common/Loader";
-import NotificationIconSVG from "@/components/SVG/NotificationIconSVG";
 import useLogout from "@/hooks/Auth/useLogout";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Topbar() {
   // Global States
@@ -18,29 +17,26 @@ export default function Topbar() {
 
   useEffect(() => {
     if (currentPath === "/") {
-      setDynamicHeadingText("EV Calculation");
-      setDynamicSubheading("Welcome back");
+      setDynamicHeadingText("Cálculo de EV");
+      setDynamicSubheading("Bienvenido de nuevo");
     } else if (currentPath === "/vechile") {
-      setDynamicHeadingText("EV Route Calculate Tools");
-      setDynamicSubheading("Vehicle");
+      setDynamicHeadingText("Herramientas de cálculo de rutas EV");
+      setDynamicSubheading("Vehículo");
     } else if (currentPath === "/route") {
-      setDynamicHeadingText("EV Route Planner");
+      setDynamicHeadingText("Planificador de rutas para vehículos eléctricos");
       setDynamicSubheading(
-        "Calculate optimal routes with charging stops based on vehicle specifications"
+        "Calcular rutas óptimas con paradas de carga según las especificaciones del vehículo",
       );
     } else if (currentPath === "/result") {
-      setDynamicHeadingText("EV Result Simulation");
+      setDynamicHeadingText("Simulación de resultados EV");
       setDynamicSubheading(
-        "Plan your journey and calculate battery consumption"
+        "Planifica tu viaje y calcula el consumo de batería",
       );
     } else if (currentPath === "/route-analysis-results") {
-      setDynamicHeadingText("EV Result Simulation");
+      setDynamicHeadingText("Simulación de resultados EV");
       setDynamicSubheading(
-        "Plan your journey and calculate battery consumption"
+        "Planifica tu viaje y calcula el consumo de batería",
       );
-    } else if (currentPath === "/notification") {
-      setDynamicHeadingText("Notification");
-      setDynamicSubheading("Show the Notification");
     }
   }, [currentPath]);
 
@@ -66,10 +62,7 @@ export default function Topbar() {
       </div>
 
       <div className="flex items-center gap-5">
-        <CommonButton children="Logout" onClick={handleLogout} />
-
-        {/* <CommonButton to="/auth/login" children="Login" />
-        <CommonButton to="/auth/register" children="Register" /> */}
+        <CommonButton children="Cerrar sesión" onClick={handleLogout} />
       </div>
 
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-95/100 border-b border-[#637381]/20"></div>
