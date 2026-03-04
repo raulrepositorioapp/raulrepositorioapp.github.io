@@ -61,7 +61,6 @@ export default function EnergyProfileElevationChart({ elevationData }) {
   };
 
   const data = prepareData();
-  const isDownsampled = elevationData?.length > MAX_POINTS;
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (!active || !payload || !payload.length) return null;
@@ -90,13 +89,13 @@ export default function EnergyProfileElevationChart({ elevationData }) {
     <div className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 shadow-sm">
       <div className="mb-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-          Relative energy demand vs. route elevation
+          Demanda energética relativa vs. elevación de la ruta
         </h2>
         <p className="text-gray-600 mt-3">
-          Relative energy demand shows the vehicle’s energy effort as a function
-          of the route profile. It is a normalized percentage value and does not
-          represent the actual battery state, nor does it assume recharging
-          during the trip.
+          La demanda energética relativa muestra el consumo energético del
+          vehículo en función del perfil de la ruta. Es un valor porcentual
+          normalizado y no representa el estado real de la batería ni presupone
+          la recarga durante el viaje.
         </p>
       </div>
 

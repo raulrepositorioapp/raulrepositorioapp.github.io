@@ -14,7 +14,6 @@ export default function RouteAnalysisResults() {
       <RouteAnalysisResultsTopSection
         locationData={analysisData?.route_summary}
         analysisData={analysisData?.summary_cards}
-        tripId={analysisData?.trip_id}
       />
 
       <div className="grid grid-cols-2 mt-6 gap-6">
