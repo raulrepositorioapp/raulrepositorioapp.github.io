@@ -32,7 +32,7 @@ function FitMapToBounds({ bounds }) {
         padding: { top: 50, bottom: 50, left: 50, right: 50 },
         maxZoom: 12,
         duration: 800,
-      }
+      },
     );
   }, [mapCtx, bounds]);
 
@@ -132,7 +132,7 @@ export default function RouteMapSection({ locationCoordinates }) {
         const destination = locationCoordinates[1];
 
         const response = await fetch(
-          `https://router.project-osrm.org/route/v1/driving/${origin.lng},${origin.lat};${destination.lng},${destination.lat}?overview=full&geometries=geojson&alternatives=true`
+          `https://router.project-osrm.org/route/v1/driving/${origin.lng},${origin.lat};${destination.lng},${destination.lat}?overview=full&geometries=geojson&alternatives=true`,
         );
 
         if (!response.ok) throw new Error("Route fetch failed");
@@ -146,7 +146,7 @@ export default function RouteMapSection({ locationCoordinates }) {
               duration: route.duration,
               distance: route.distance,
               index,
-            }))
+            })),
           );
         } else {
           setRoutes([]);
@@ -180,7 +180,7 @@ export default function RouteMapSection({ locationCoordinates }) {
   return (
     <div>
       <div className="bg-white p-8 rounded-2xl border">
-        <h1 className="title">Route Map</h1>
+        <h1 className="title">Mapa de ruta</h1>
 
         <div className="h-[500px] w-full relative mt-4 rounded-lg overflow-hidden border border-gray-200">
           <Map
@@ -215,7 +215,7 @@ export default function RouteMapSection({ locationCoordinates }) {
                     <div className="absolute -top-2 -left-2 size-9 rounded-full bg-green-500/20 animate-ping " />
                   </div>
                   <MarkerLabel position="top">
-                    {locationCoordinates[0].name || "Origin"}
+                    {locationCoordinates[0].name || "Origen"}
                   </MarkerLabel>
                 </MarkerContent>
               </MapMarker>
@@ -239,32 +239,6 @@ export default function RouteMapSection({ locationCoordinates }) {
             )}
           </Map>
 
-          {/* This is a list of routes, but no longer needed */}
-          {/* {routes.length > 0 && (
-            <div className="absolute top-3 left-3 flex flex-col gap-2">
-              {routes.map((route, index) => {
-                const isActive = index === selectedIndex;
-                return (
-                  <Button
-                    key={index}
-                    variant={isActive ? "default" : "secondary"}
-                    size="sm"
-                    onClick={() => setSelectedIndex(index)}
-                    className={
-                      !isActive
-                        ? "bg-[#0f0f0f] text-white hover:bg-[#1a1a1a] cursor-pointer"
-                        : "cursor-pointer"
-                    }
-                  >
-                    <Clock className="size-3.5 mr-2" />
-                    {formatDuration(route.duration)} •{" "}
-                    {formatDistance(route.distance)}
-                  </Button>
-                );
-              })}
-            </div>
-          )} */}
-
           {isLoading && locationCoordinates?.length === 2 && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/80">
               <Loader2 className="size-8 animate-spin text-blue-600" />
@@ -277,14 +251,14 @@ export default function RouteMapSection({ locationCoordinates }) {
                 <div className="flex items-center gap-1.5">
                   <div className="size-3 rounded-full bg-green-500" />
                   <span className="font-medium">
-                    {locationCoordinates[0]?.name || "Origin"}
+                    {locationCoordinates[0]?.name || "Origen"}
                   </span>
                 </div>
                 <span className="text-gray-400">→</span>
                 <div className="flex items-center gap-1.5">
                   <div className="size-3 rounded-full bg-red-500" />
                   <span className="font-medium">
-                    {locationCoordinates[1]?.name || "Destination"}
+                    {locationCoordinates[1]?.name || "Destino"}
                   </span>
                 </div>
               </div>
