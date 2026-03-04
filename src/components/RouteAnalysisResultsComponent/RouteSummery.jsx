@@ -7,10 +7,10 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold text-gray-900 mb-2">
-          Route Summary
+          Resumen de la ruta
         </h1>
         <p className="text-base text-gray-600">
-          Energy loss by source across route segments.
+          Pérdida de energía por fuente a lo largo de los segmentos de la ruta.
         </p>
       </div>
 
@@ -18,13 +18,13 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
       <div className="grid grid-cols-1 gap-8 mb-8">
         {/* Route Information */}
         <div>
-          <h2 className="title2 mb-4 font-bold">Route Information</h2>
+          <h2 className="title2 mb-4 font-bold">Información de la ruta</h2>
           <div className="border rounded-md">
             <Table>
               <TableBody>
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
-                    Origin
+                    Origen
                   </TableCell>
                   <TableCell className="text-right paragraph">
                     {route_summary?.origin}
@@ -32,7 +32,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
-                    Destination
+                    Destino
                   </TableCell>
                   <TableCell className="text-right paragraph">
                     {route_summary?.destination}
@@ -40,7 +40,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
-                    Total Distance
+                    Distancia total
                   </TableCell>
                   <TableCell className="text-right paragraph">
                     {route_summary?.total_distance_km} km
@@ -48,7 +48,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
-                    Avg. Speed
+                    Velocidad promedio
                   </TableCell>
                   <TableCell className="text-right paragraph">
                     {averageSpeed} km/h
@@ -56,7 +56,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
-                    Avg. Consumption
+                    Consumo promedio
                   </TableCell>
                   <TableCell className="text-right paragraph">
                     {route_summary?.avg_consumption_kwh_100km} kWh/100km
@@ -64,7 +64,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
-                    Stops
+                    Paradas
                   </TableCell>
                   <TableCell className="text-right paragraph">
                     {route_summary?.charging_stop_count}
