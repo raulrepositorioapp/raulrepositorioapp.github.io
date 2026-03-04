@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Search, Filter, Plus, Eye, Download } from "lucide-react";
+import { Search, Plus, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import useGetHistory from "@/hooks/History/useGetHistory";
 import TableTrSkeleton from "../Skeleton/TableTrSkeleton";
-import toast from "react-hot-toast";
-import Loader from "../common/Loader";
-import usePdfExport from "@/hooks/Export/usePdfExport";
 import SingleResultViewModal from "./SingleResultViewModal";
 
 export default function EVRouteTable() {
@@ -35,25 +32,11 @@ export default function EVRouteTable() {
   const filteredRoutes = allHistory?.results?.filter(
     (route) =>
       route?.route_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      route?.vehicle.toLowerCase().includes(searchTerm.toLowerCase())
+      route?.vehicle.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const handleViewRouteHistory = (route) => {
     setShowSingleDetailsModal({ show: true, data: route });
-  };
-
-  // PDF Download Hook
-  const [currentExportableId, setCurrentExportableId] = useState(null);
-  const { pdfExport, isPdfExportLoading } = usePdfExport({
-    id: currentExportableId,
-  });
-
-  if (pdfExport && pdfExport.download_url) {
-    window.open(pdfExport.download_url, "_blank", "noopener,noreferrer");
-  }
-
-  const handleDownloadRouteHistory = (route) => {
-    setCurrentExportableId(route?.id);
   };
 
   return (
@@ -63,16 +46,16 @@ export default function EVRouteTable() {
         <div className="flex justify-between items-start mb-6">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Route Calculations History
+              Historial de cálculos de ruta
             </h1>
             <p className="text-gray-500">
-              View and manage EV route simulations
+              Ver y gestionar simulaciones de rutas de vehículos eléctricos
             </p>
           </div>
           <Link to="/vechile">
             <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg flex items-center gap-2 font-medium shadow-sm transition-colors">
               <Plus size={20} />
-              New Ev Route Simulation
+              Nueva simulación de ruta EV
             </button>
           </Link>
         </div>
@@ -86,7 +69,7 @@ export default function EVRouteTable() {
             />
             <input
               type="text"
-              placeholder="Search the route name and vehicle"
+              placeholder="Busca el nombre de la ruta y el vehículo"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
@@ -101,25 +84,25 @@ export default function EVRouteTable() {
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50">
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Route Name
+                    Nombre de la ruta
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Vehicle
+                    Vehículo
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Date
+                    Fecha
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Distance
+                    Distancia
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Energy Usage
+                    Consumo de energía
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Status
+                    Estado
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Action
+                    Acción
                   </th>
                 </tr>
               </thead>
@@ -147,7 +130,7 @@ export default function EVRouteTable() {
                     <td className="px-6 py-4">
                       <span
                         className={`inline-block px-4 py-1.5 rounded-md text-sm font-medium capitalize ${getStatusStyle(
-                          route?.status
+                          route?.status,
                         )}`}
                       >
                         {route?.status}
@@ -161,13 +144,6 @@ export default function EVRouteTable() {
                           className="text-gray-600 hover:text-gray-900 transition-colors"
                         >
                           <Eye size={20} />
-                        </button>
-                        <button
-                          onClick={() => handleDownloadRouteHistory(route)}
-                          type="button"
-                          className="text-gray-600 hover:text-gray-900 transition-colors"
-                        >
-                          <Download size={20} />
                         </button>
                       </div>
                     </td>
@@ -205,8 +181,6 @@ export default function EVRouteTable() {
           </div>
         </div>
       </div>
-
-      {isPdfExportLoading && <Loader />}
 
       {showSingleDetailsModal?.show && (
         <SingleResultViewModal

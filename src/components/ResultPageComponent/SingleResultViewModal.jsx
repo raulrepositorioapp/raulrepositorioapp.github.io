@@ -70,8 +70,10 @@ export default function SingleResultViewModal({ itemData, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Trip Details</h2>
-            <p className="text-gray-500 mt-1">Complete journey information</p>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Detalles del viaje
+            </h2>
+            <p className="text-gray-500 mt-1">Información completa del viaje</p>
           </div>
           <button
             onClick={onClose}
@@ -108,7 +110,7 @@ export default function SingleResultViewModal({ itemData, onClose }) {
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <Navigation className="w-5 h-5" />
-                Route
+                Ruta
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -117,7 +119,7 @@ export default function SingleResultViewModal({ itemData, onClose }) {
                     <div className="w-0.5 h-10 bg-gray-200 mt-1"></div>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Origin</p>
+                    <p className="text-sm text-gray-500">Origen</p>
                     <p className="font-medium">
                       {singleHistoryDetails?.origin}
                     </p>
@@ -130,7 +132,7 @@ export default function SingleResultViewModal({ itemData, onClose }) {
                     <div className="w-0.5 h-10 bg-gray-200 mt-1"></div>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Destination</p>
+                    <p className="text-sm text-gray-500">Destino</p>
                     <p className="font-medium">
                       {singleHistoryDetails?.destination}
                     </p>
@@ -142,7 +144,7 @@ export default function SingleResultViewModal({ itemData, onClose }) {
                     <MapPin className="w-5 h-5 text-red-500" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Total Distance</p>
+                    <p className="text-sm text-gray-500">Distancia total</p>
                     <p className="font-medium">
                       {formatDistance(singleHistoryDetails?.total_distance_km)}
                     </p>
@@ -156,18 +158,18 @@ export default function SingleResultViewModal({ itemData, onClose }) {
               <div className="bg-gray-50 p-5 rounded-xl">
                 <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <Car className="w-5 h-5" />
-                  Vehicle Details
+                  Detalles del vehículo
                 </h4>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-gray-500">Model</p>
+                    <p className="text-sm text-gray-500">Modelo</p>
                     <p className="font-medium">
                       {singleHistoryDetails?.vehicle}
                     </p>
                   </div>
                   <div className="pt-3 border-t border-gray-200">
-                    <p className="text-sm text-gray-500">Vehicle Type</p>
-                    <p className="font-medium">Electric Vehicle (EV)</p>
+                    <p className="text-sm text-gray-500">Tipo de vehículo</p>
+                    <p className="font-medium">Vehículo eléctrico (EV)</p>
                   </div>
                 </div>
               </div>
@@ -175,17 +177,17 @@ export default function SingleResultViewModal({ itemData, onClose }) {
               <div className="bg-blue-50 p-5 rounded-xl">
                 <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                   <Battery className="w-5 h-5" />
-                  Energy Consumption
+                  Consumo de energía
                 </h4>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-sm text-gray-500">Energy Used</p>
+                    <p className="text-sm text-gray-500">Energía consumida</p>
                     <p className="font-medium text-2xl text-blue-600">
                       {singleHistoryDetails?.energy_used_kwh.toFixed(2)} kWh
                     </p>
                   </div>
                   <div className="pt-3 border-t border-blue-200">
-                    <p className="text-sm text-gray-500">Efficiency</p>
+                    <p className="text-sm text-gray-500">Eficiencia</p>
                     <p className="font-medium">
                       {(
                         singleHistoryDetails?.total_distance_km /
@@ -202,7 +204,7 @@ export default function SingleResultViewModal({ itemData, onClose }) {
 
         {isSingleHistoryDetailsError && (
           <div className="py-20 text-center text-black text-lg font-semibold">
-            Something went wrong! Please try again
+            ¡Algo salió mal! Por favor, intenta de nuevo
           </div>
         )}
       </div>
