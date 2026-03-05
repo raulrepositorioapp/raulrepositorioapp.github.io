@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pin, Wrench } from "lucide-react";
+import { Pencil, Pin, Wrench } from "lucide-react";
 import { SlArrowRight } from "react-icons/sl";
 import CommonButton from "../common/CommonButton";
 import CreateNewVehicleForm from "../common/CreateNewVehicleModal";
@@ -7,6 +7,7 @@ import CustomVehicleModalForm from "../common/CustomVehicleModalForm";
 import useGetAllVehicles from "@/hooks/Vehicles/useGetAllVehicles";
 import VehicleItemSkeleton from "../Skeleton/VehicleItemSkeleton";
 import useGetConstants from "@/hooks/Constants/useGetConstants";
+import ConstantsModalForm from "../common/ConstantsModalForm";
 
 const SpecItem = ({ label, value, type }) => (
   <div>
@@ -22,6 +23,7 @@ export default function VehicleCard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [customVehicle, setCustomVehicle] = useState(false);
   const [customVehicleItem, setCustomVehicleItem] = useState(null);
+  const [constantsModalOpen, setConstantsModalOpen] = useState(false);
 
   // Constants
   const { constants } = useGetConstants();
@@ -149,25 +151,24 @@ export default function VehicleCard() {
           ))}
       </div>
 
-      {isAllVehiclesError && (
-        <div className="w-full h-[300px] flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-semibold text-gray-900">
-              No se encontraron vehículos
-            </h1>
-            <p className="text-gray-600 mt-2">
-              Crea un vehículo personalizado o selecciona un modelo
-              preestablecido.
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* Bottom section */}
       {selectedVehicle && (
         <div className="mt-8 bg-white p-6 rounded-2xl flex justify-between items-center">
           <div>
-            <h1 className="title">Constantes ambientales</h1>
+            <div className="flex items-center gap-5 mb-5">
+              <h1 className="title">Constantes ambientales</h1>
+              <div>
+                <button
+                  onClick={() => setConstantsModalOpen(true)}
+                  type="button"
+                  className="border text-gray-500 px-4 py-2 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 hover:border-emerald-500 hover:text-emerald-500 duration-300 cursor-pointer"
+                >
+                  <Pencil size={16} />
+                  Editar
+                </button>
+              </div>
+            </div>
+
             <div className="mt-1 flex items-center gap-4">
               <p className="Titel2">
                 Densidad del aire:{" "}
@@ -224,6 +225,28 @@ export default function VehicleCard() {
           vehicle={customVehicleItem}
           onClose={setCustomVehicle}
         />
+      )}
+
+      {constantsModalOpen && (
+        <ConstantsModalForm
+          constants={constants}
+          onClose={setConstantsModalOpen}
+        />
+      )}
+
+      {/* Error */}
+      {isAllVehiclesError && (
+        <div className="w-full h-[300px] flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-semibold text-gray-900">
+              No se encontraron vehículos
+            </h1>
+            <p className="text-gray-600 mt-2">
+              Crea un vehículo personalizado o selecciona un modelo
+              preestablecido.
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );
