@@ -44,7 +44,7 @@ export default function CreateNewVehicleModal({ onClose }) {
   const { mutate: createVehicle, isPending: isCreateVehiclePending } =
     useCreateVehicles({
       onSuccess: (data) => {
-        toast.success(data?.message || "Vehicle created successfully!");
+        toast.success(data?.message || "Vehículo creado correctamente!");
         queryClient.invalidateQueries(["vehicles"]);
         onClose();
       },
@@ -152,7 +152,7 @@ export default function CreateNewVehicleModal({ onClose }) {
   }, [previewUrl]);
 
   const vehicleTypeOptions = [
-    { value: "", label: "Select vehicle type" },
+    { value: "", label: "Seleccionar tipo de vehículo" },
     { value: "car", label: "Car" },
     { value: "bike", label: "Bike" },
     { value: "bus", label: "Bus" },
@@ -168,23 +168,25 @@ export default function CreateNewVehicleModal({ onClose }) {
       />
 
       <div className="relative bg-white rounded-xl shadow-xl max-h-[90vh] w-full max-w-4xl overflow-y-auto p-8 custom-scrollbar">
-        <h2 className="text-2xl font-semibold">Create New Vehicle</h2>
+        <h2 className="text-2xl font-semibold">Crear nuevo vehículo</h2>
         <p className="text-gray-500 mt-1 text-sm">
-          Define physics parameters for a new vehicle profile.
+          Definir parámetros físicos para un nuevo perfil de vehículo.
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-8">
           {/* Vehicle Parameters */}
           <div className="border rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Vehicle Parameters</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              Parámetros del vehículo
+            </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <input
                   {...register("vehicleName", {
-                    required: "Vehicle name is required",
+                    required: "Nombre del vehículo es requerido",
                   })}
-                  placeholder="Vehicle Name"
+                  placeholder="Nombre del vehículo"
                   className={`border rounded-lg p-3 text-sm w-full ${
                     errors.vehicleName ? "border-red-500" : "border-gray-300"
                   }`}
@@ -200,7 +202,7 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <select
                   {...register("vehicleType", {
-                    required: "Vehicle type is required",
+                    required: "Tipo de vehículo es requerido",
                   })}
                   className={`border rounded-lg p-3 text-sm w-full ${
                     errors.vehicleType ? "border-red-500" : "border-gray-300"
@@ -221,8 +223,8 @@ export default function CreateNewVehicleModal({ onClose }) {
 
               <div>
                 <input
-                  {...register("weightKg", { required: "Weight is required" })}
-                  placeholder="Weight (kg)"
+                  {...register("weightKg", { required: "Peso es requerido" })}
+                  placeholder="Peso (kg)"
                   type="number"
                   className={`border rounded-lg p-3 text-sm w-full ${
                     errors.weightKg ? "border-red-500" : "border-gray-300"
@@ -238,9 +240,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("frontalArea", {
-                    required: "Frontal area is required",
+                    required: "Área frontal es requerida",
                   })}
-                  placeholder="Frontal Area (m²)"
+                  placeholder="Área frontal (m²)"
                   type="number"
                   step="0.01"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -257,9 +259,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("dragCoefficient", {
-                    required: "Drag coefficient is required",
+                    required: "Coeficiente de arrastre es requerido",
                   })}
-                  placeholder="Aerodynamic Drag Coefficient"
+                  placeholder="Coeficiente de arrastre"
                   type="number"
                   step="0.001"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -278,9 +280,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("regenerationEfficiency", {
-                    required: "Regeneration efficiency is required",
+                    required: "Eficiencia de regeneración es requerida",
                   })}
-                  placeholder="Regeneration Efficiency (%)"
+                  placeholder="Eficiencia de regeneración (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -299,9 +301,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("maxRegenPowerKW", {
-                    required: "Max regen power is required",
+                    required: "Potencia de regeneración máxima es requerida",
                   })}
-                  placeholder="Max Regenerative Power (kW)"
+                  placeholder="Potencia de regeneración máxima (kW)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -319,8 +321,8 @@ export default function CreateNewVehicleModal({ onClose }) {
 
               <div>
                 <input
-                  {...register("crr", { required: "CRR is required" })}
-                  placeholder="Rolling Resistance Coefficient (CRR)"
+                  {...register("crr", { required: "CRR es requerida" })}
+                  placeholder="Coeficiente de resistencia de rodadura (CRR)"
                   type="number"
                   step="0.0001"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -331,8 +333,8 @@ export default function CreateNewVehicleModal({ onClose }) {
 
               <div>
                 <input
-                  {...register("krot", { required: "Krot is required" })}
-                  placeholder="Rotational Loss Coefficient (Krot)"
+                  {...register("krot", { required: "Krot es requerido" })}
+                  placeholder="Coeficiente de pérdida rotacional (Krot)"
                   type="number"
                   step="0.0001"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -344,9 +346,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("motorEfficiency", {
-                    required: "Motor efficiency is required",
+                    required: "Eficiencia del motor es requerida",
                   })}
-                  placeholder="Motor Efficiency (%)"
+                  placeholder="Eficiencia del motor (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -360,9 +362,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("auxiliaryPowerKW", {
-                    required: "Auxiliary power is required",
+                    required: "Potencia auxiliar es requerida",
                   })}
-                  placeholder="Auxiliary Power (kW)"
+                  placeholder="Potencia auxiliar (kW)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -377,15 +379,15 @@ export default function CreateNewVehicleModal({ onClose }) {
 
           {/* Battery section remains unchanged */}
           <div className="border rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Battery</h3>
+            <h3 className="text-lg font-semibold mb-4">Batería</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <input
                   {...register("nominalBatteryCapacity", {
-                    required: "Nominal capacity is required",
+                    required: "Capacidad nominal de la batería es requerida",
                   })}
-                  placeholder="Nominal Battery Capacity (kWh)"
+                  placeholder="Capacidad nominal de la batería (kWh)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -404,9 +406,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("usableBatteryCapacity", {
-                    required: "Usable capacity is required",
+                    required: "Capacidad útil de la batería es requerida",
                   })}
-                  placeholder="Usable Battery Capacity (kWh)"
+                  placeholder="Capacidad útil de la batería (kWh)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -425,9 +427,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("nominalVoltage", {
-                    required: "Nominal voltage is required",
+                    required: "Voltaje nominal es requerido",
                   })}
-                  placeholder="Nominal Voltage (V)"
+                  placeholder="Voltaje nominal (V)"
                   type="number"
                   className={`border rounded-lg p-3 text-sm w-full ${
                     errors.nominalVoltage ? "border-red-500" : "border-gray-300"
@@ -443,9 +445,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("maxChargeCurrent", {
-                    required: "Max current is required",
+                    required: "Corriente máxima es requerida",
                   })}
-                  placeholder="Max Charge/Discharge Current (A)"
+                  placeholder="Corriente máxima (A)"
                   type="number"
                   className={`border rounded-lg p-3 text-sm w-full ${
                     errors.maxChargeCurrent
@@ -463,9 +465,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("upperSOC", {
-                    required: "Upper SOC is required",
+                    required: "Límite superior de SOC es requerido",
                   })}
-                  placeholder="Upper SOC limit (%)"
+                  placeholder="Límite superior de SOC (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -482,9 +484,9 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("lowerSOC", {
-                    required: "Lower SOC is required",
+                    required: "Límite inferior de SOC es requerido",
                   })}
-                  placeholder="Lower SOC limit (%)"
+                  placeholder="Límite inferior de SOC (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -503,7 +505,7 @@ export default function CreateNewVehicleModal({ onClose }) {
           {/* Photo Upload - unchanged */}
           <div className="w-full">
             <label className="block text-sm font-medium mb-2">
-              Vehicle Photo Upload <span className="text-red-500">*</span>
+              Subir foto del vehículo <span className="text-red-500">*</span>
             </label>
 
             <label
@@ -516,14 +518,14 @@ export default function CreateNewVehicleModal({ onClose }) {
                 type="file"
                 accept="image/*"
                 {...register("vehiclePhoto", {
-                  required: "Vehicle photo is required",
+                  required: "Subir foto del vehículo es requerido",
                   onChange: () => clearErrors("vehiclePhoto"),
                 })}
                 className="hidden"
                 id="vehiclePhoto"
               />
               <span className="cursor-pointer text-gray-600 text-sm">
-                {hasFile ? "Change Photo" : "Click to upload photo"}
+                {hasFile ? "Cambiar foto" : "Haga clic para cargar la foto"}
               </span>
             </label>
 
@@ -536,7 +538,7 @@ export default function CreateNewVehicleModal({ onClose }) {
             {hasFile && (
               <div className="mt-4">
                 <p className="text-sm text-green-600 mb-2">
-                  Uploaded: {fileName}
+                  Cargada: {fileName}
                 </p>
                 <div className="flex justify-center">
                   <img
@@ -556,7 +558,7 @@ export default function CreateNewVehicleModal({ onClose }) {
               onClick={() => onClose(false)}
               className="px-5 py-2 border rounded-lg text-gray-600 cursor-pointer"
             >
-              Cancel
+              Cancelar
             </button>
 
             <button
@@ -568,7 +570,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   : "bg-emerald-600 cursor-pointer"
               }`}
             >
-              {isCreateVehiclePending ? "Creating..." : "Create Vehicle"}
+              {isCreateVehiclePending ? "Creando..." : "Crear vehículo"}
             </button>
           </div>
         </form>

@@ -49,12 +49,12 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
     useUpdateExistingVehicle({
       vehicleId: vehicle?.id,
       onSuccess: (data) => {
-        toast.success(data?.message || "Vehicle updated successfully!");
+        toast.success(data?.message || "Vehículo actualizado correctamente!");
         queryClient.invalidateQueries(["vehicles"]);
         onClose();
       },
       onError: (err) => {
-        toast.error(err?.response?.data?.message || "Something went wrong!");
+        toast.error(err?.response?.data?.message || "Algo salió mal!");
       },
     });
 
@@ -64,12 +64,12 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
   } = useUpdateDefaultVehicles({
     vehicleId: vehicle?.id,
     onSuccess: (data) => {
-      toast.success(data?.message || "Vehicle updated successfully!");
+      toast.success(data?.message || "Vehículo actualizado correctamente!");
       queryClient.invalidateQueries(["vehicles"]);
       onClose();
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message || "Something went wrong!");
+      toast.error(err?.response?.data?.message || "Algo salió mal!");
     },
   });
 
@@ -105,7 +105,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
   );
 
   const vehicleTypeOptions = [
-    { value: "", label: "Select vehicle type" },
+    { value: "", label: "Seleccione el tipo de vehículo" },
     { value: "car", label: "Car" },
     { value: "bike", label: "Bike" },
     { value: "bus", label: "Bus" },
@@ -118,25 +118,29 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
 
       <div className="relative bg-white rounded-xl shadow-xl max-h-[90vh] w-full max-w-4xl overflow-y-auto p-8 custom-scrollbar">
-        <h2 className="text-2xl font-semibold">Edit Custom Vehicle</h2>
+        <h2 className="text-2xl font-semibold">
+          Editar vehículo personalizado
+        </h2>
         <p className="text-gray-500 mt-1 text-sm">
-          Edit a custom configuration for your simulation.
+          Editar una configuración personalizada para su simulación.
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-8">
           {/* Vehicle Parameters */}
           <div className="border rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Vehicle Parameters</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              Parámetros del vehículo
+            </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField label="Vehicle Name">
+              <FormField label="Nombre del vehículo">
                 <input
                   {...register("vehicleName")}
                   className="border rounded-lg p-3 text-sm"
                 />
               </FormField>
 
-              <FormField label="Vehicle Type">
+              <FormField label="Tipo de vehículo">
                 <select
                   {...register("vehicleType")}
                   className="border rounded-lg p-3 text-sm"
@@ -149,7 +153,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 </select>
               </FormField>
 
-              <FormField label="Max Regen Power (kW)">
+              <FormField label="Potencia de regeneración máxima (kW)">
                 <input
                   {...register("maxRegenPowerKW")}
                   inputMode="decimal"
@@ -173,7 +177,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Motor Efficiency (%)">
+              <FormField label="Eficiencia del motor (%)">
                 <input
                   {...register("motorEfficiency")}
                   inputMode="decimal"
@@ -181,7 +185,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Auxiliary Power (kW)">
+              <FormField label="Potencia auxiliar (kW)">
                 <input
                   {...register("auxiliaryPowerKW")}
                   inputMode="decimal"
@@ -189,7 +193,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Weight (kg)">
+              <FormField label="Peso (kg)">
                 <input
                   {...register("weightKg")}
                   inputMode="decimal"
@@ -197,7 +201,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Frontal Area (m²)">
+              <FormField label="Área frontal (m²)">
                 <input
                   {...register("frontalArea")}
                   inputMode="decimal"
@@ -205,7 +209,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Drag Coefficient">
+              <FormField label="Coeficiente de arrastre">
                 <input
                   {...register("dragCoefficient")}
                   inputMode="decimal"
@@ -213,7 +217,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Regeneration Efficiency (%)">
+              <FormField label="Eficiencia de regeneración (%)">
                 <input
                   {...register("regenerationEfficiency")}
                   inputMode="decimal"
@@ -225,10 +229,10 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
 
           {/* Battery */}
           <div className="border rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Battery</h3>
+            <h3 className="text-lg font-semibold mb-4">Batería</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField label="Nominal Battery Capacity (kWh)">
+              <FormField label="Capacidad nominal de la batería (kWh)">
                 <input
                   type="number"
                   {...register("nominalBatteryCapacity")}
@@ -236,7 +240,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Usable Battery Capacity (kWh)">
+              <FormField label="Capacidadusable de la batería (kWh)">
                 <input
                   type="number"
                   {...register("usableBatteryCapacity")}
@@ -244,7 +248,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Nominal Voltage (V)">
+              <FormField label="Voltaje nominal (V)">
                 <input
                   type="number"
                   {...register("nominalVoltage")}
@@ -252,7 +256,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Max Charge / Discharge Current (A)">
+              <FormField label="Corriente máxima de carga / descarga (A)">
                 <input
                   type="number"
                   {...register("maxChargeCurrent")}
@@ -260,7 +264,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Upper SOC Limit (%)">
+              <FormField label="Límite superior de SOC (%)">
                 <input
                   type="number"
                   {...register("upperSOC")}
@@ -268,7 +272,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField label="Lower SOC Limit (%)">
+              <FormField label="Límite inferior de SOC (%)">
                 <input
                   type="number"
                   {...register("lowerSOC")}
@@ -285,7 +289,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
               onClick={() => onClose(false)}
               className="px-5 py-2 border rounded-lg text-gray-600"
             >
-              Cancel
+              Cancelar
             </button>
 
             <button
@@ -297,7 +301,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                   : "bg-gray-300 cursor-not-allowed"
               }`}
             >
-              Save & Update
+              Guardar & Actualizar
             </button>
           </div>
         </form>
