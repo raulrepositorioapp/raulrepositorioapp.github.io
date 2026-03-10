@@ -1,5 +1,5 @@
 import useCreateVehicles from "@/hooks/Vehicles/useCreateVehicles";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Loader from "./Loader";
 import toast from "react-hot-toast";
@@ -25,17 +25,14 @@ export default function CreateNewVehicleModal({ onClose }) {
       frontalArea: "",
       dragCoefficient: "",
       regenerationEfficiency: "",
-      nominalBatteryCapacity: "",
       usableBatteryCapacity: "",
-      nominalVoltage: "",
-      maxChargeCurrent: "",
       upperSOC: "",
       lowerSOC: "",
       maxRegenPowerKW: "",
       crr: "",
-      krot: "",
       motorEfficiency: "",
       auxiliaryPowerKW: "",
+      passengerMassKg: "",
       vehiclePhoto: undefined,
     },
   });
@@ -61,18 +58,15 @@ export default function CreateNewVehicleModal({ onClose }) {
             frontal_area_m2: "frontalArea",
             drag_coefficient: "dragCoefficient",
             regeneration_efficiency: "regenerationEfficiency",
-            nominal_battery_capacity_kwh: "nominalBatteryCapacity",
             usable_battery_capacity_kwh: "usableBatteryCapacity",
-            nominal_voltage_v: "nominalVoltage",
-            max_charge_discharge_current_a: "maxChargeCurrent",
             upper_soc_limit: "upperSOC",
             lower_soc_limit: "lowerSOC",
 
             max_regen_power_kw: "maxRegenPowerKW",
             crr: "crr",
-            krot: "krot",
             motor_efficiency: "motorEfficiency",
             auxiliary_power_kw: "auxiliaryPowerKW",
+            passenger_mass_kg: "passengerMassKg",
 
             photo: "vehiclePhoto",
           };
@@ -102,39 +96,30 @@ export default function CreateNewVehicleModal({ onClose }) {
     const file = data.vehiclePhoto?.[0] || null;
 
     const submittedData = new FormData();
-    submittedData.append("name", data.vehicleName);
-    submittedData.append("vehicle_type", data.vehicleType);
-    submittedData.append("weight_kg", data.weightKg);
-    submittedData.append("frontal_area_m2", data.frontalArea);
-    submittedData.append("drag_coefficient", data.dragCoefficient);
+    submittedData.append("name", data.vehicleName); //
+    submittedData.append("vehicle_type", data.vehicleType); //
+    submittedData.append("weight_kg", data.weightKg); //
+    submittedData.append("frontal_area_m2", data.frontalArea); //
+    submittedData.append("drag_coefficient", data.dragCoefficient); //
     submittedData.append(
       "regeneration_efficiency",
       data.regenerationEfficiency,
-    );
-    submittedData.append(
-      "nominal_battery_capacity_kwh",
-      data.nominalBatteryCapacity,
-    );
+    ); //
     submittedData.append(
       "usable_battery_capacity_kwh",
       data.usableBatteryCapacity,
-    );
-    submittedData.append("nominal_voltage_v", data.nominalVoltage);
-    submittedData.append(
-      "max_charge_discharge_current_a",
-      data.maxChargeCurrent,
-    );
-    submittedData.append("upper_soc_limit", data.upperSOC);
-    submittedData.append("lower_soc_limit", data.lowerSOC);
+    ); //
+    submittedData.append("upper_soc_limit", data.upperSOC); //
+    submittedData.append("lower_soc_limit", data.lowerSOC); //
 
-    submittedData.append("max_regen_power_kw", data.maxRegenPowerKW);
-    submittedData.append("crr", data.crr);
-    submittedData.append("krot", data.krot);
-    submittedData.append("motor_efficiency", data.motorEfficiency);
-    submittedData.append("auxiliary_power_kw", data.auxiliaryPowerKW);
+    submittedData.append("max_regen_power_kw", data.maxRegenPowerKW); //
+    submittedData.append("crr", data.crr); //
+    submittedData.append("motor_efficiency", data.motorEfficiency); //
+    submittedData.append("auxiliary_power_kw", data.auxiliaryPowerKW); //
+    submittedData.append("passenger_mass_kg", data.passengerMassKg); //
 
     if (file) {
-      submittedData.append("photo", file);
+      submittedData.append("photo", file); //
     }
 
     createVehicle(submittedData);
@@ -145,7 +130,7 @@ export default function CreateNewVehicleModal({ onClose }) {
   const fileName = hasFile ? uploadedFile[0].name : "";
   const previewUrl = hasFile ? URL.createObjectURL(uploadedFile[0]) : null;
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);
     };
@@ -224,7 +209,7 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("weightKg", { required: "Peso es requerido" })}
-                  placeholder="Peso (kg)"
+                  placeholder="Masa del vehículo (kg)"
                   type="number"
                   className={`border rounded-lg p-3 text-sm w-full ${
                     errors.weightKg ? "border-red-500" : "border-gray-300"
@@ -242,7 +227,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("frontalArea", {
                     required: "Área frontal es requerida",
                   })}
-                  placeholder="Área frontal (m²)"
+                  placeholder="Superficie frontal (m²)"
                   type="number"
                   step="0.01"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -261,7 +246,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("dragCoefficient", {
                     required: "Coeficiente de arrastre es requerido",
                   })}
-                  placeholder="Coeficiente de arrastre"
+                  placeholder="Coeficiente de resistencia aerodinámica (C_x)"
                   type="number"
                   step="0.001"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -282,7 +267,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("regenerationEfficiency", {
                     required: "Eficiencia de regeneración es requerida",
                   })}
-                  placeholder="Eficiencia de regeneración (%)"
+                  placeholder="Rendimiento regeneración (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -303,7 +288,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("maxRegenPowerKW", {
                     required: "Potencia de regeneración máxima es requerida",
                   })}
-                  placeholder="Potencia de regeneración máxima (kW)"
+                  placeholder="Potencia máxima de regeneración (kW)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -322,7 +307,7 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("crr", { required: "CRR es requerida" })}
-                  placeholder="Coeficiente de resistencia de rodadura (CRR)"
+                  placeholder="Coeficiente de rodadura (CRR)"
                   type="number"
                   step="0.0001"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -333,22 +318,10 @@ export default function CreateNewVehicleModal({ onClose }) {
 
               <div>
                 <input
-                  {...register("krot", { required: "Krot es requerido" })}
-                  placeholder="Coeficiente de pérdida rotacional (Krot)"
-                  type="number"
-                  step="0.0001"
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.krot ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-              </div>
-
-              <div>
-                <input
                   {...register("motorEfficiency", {
                     required: "Eficiencia del motor es requerida",
                   })}
-                  placeholder="Eficiencia del motor (%)"
+                  placeholder="Eficiencia tren motriz (n_drive)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -364,7 +337,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("auxiliaryPowerKW", {
                     required: "Potencia auxiliar es requerida",
                   })}
-                  placeholder="Potencia auxiliar (kW)"
+                  placeholder="Potencia gastada auxiliar (kW)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -384,31 +357,10 @@ export default function CreateNewVehicleModal({ onClose }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <input
-                  {...register("nominalBatteryCapacity", {
-                    required: "Capacidad nominal de la batería es requerida",
-                  })}
-                  placeholder="Capacidad nominal de la batería (kWh)"
-                  type="number"
-                  step="0.1"
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.nominalBatteryCapacity
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  }`}
-                />
-                {errors.nominalBatteryCapacity && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.nominalBatteryCapacity.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <input
                   {...register("usableBatteryCapacity", {
                     required: "Capacidad útil de la batería es requerida",
                   })}
-                  placeholder="Capacidad útil de la batería (kWh)"
+                  placeholder="Capacidad utilizable bateria (kWh)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -426,48 +378,10 @@ export default function CreateNewVehicleModal({ onClose }) {
 
               <div>
                 <input
-                  {...register("nominalVoltage", {
-                    required: "Voltaje nominal es requerido",
-                  })}
-                  placeholder="Voltaje nominal (V)"
-                  type="number"
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.nominalVoltage ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-                {errors.nominalVoltage && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.nominalVoltage.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <input
-                  {...register("maxChargeCurrent", {
-                    required: "Corriente máxima es requerida",
-                  })}
-                  placeholder="Corriente máxima (A)"
-                  type="number"
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.maxChargeCurrent
-                      ? "border-red-500"
-                      : "border-gray-300"
-                  }`}
-                />
-                {errors.maxChargeCurrent && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.maxChargeCurrent.message}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <input
                   {...register("upperSOC", {
                     required: "Límite superior de SOC es requerido",
                   })}
-                  placeholder="Límite superior de SOC (%)"
+                  placeholder="SOC superior (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -486,7 +400,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("lowerSOC", {
                     required: "Límite inferior de SOC es requerido",
                   })}
-                  placeholder="Límite inferior de SOC (%)"
+                  placeholder="SOC inferior (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -496,6 +410,27 @@ export default function CreateNewVehicleModal({ onClose }) {
                 {errors.lowerSOC && (
                   <p className="text-red-500 text-xs mt-1">
                     {errors.lowerSOC.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  {...register("passengerMassKg", {
+                    required: "Masa de pasajeros es requerida",
+                  })}
+                  placeholder="Masa pasajeros (kg)"
+                  type="number"
+                  step="0.1"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.passengerMassKg
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                />
+                {errors.passengerMassKg && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.passengerMassKg.message}
                   </p>
                 )}
               </div>
