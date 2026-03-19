@@ -138,11 +138,11 @@ export default function CreateNewVehicleModal({ onClose }) {
 
   const vehicleTypeOptions = [
     { value: "", label: "Seleccionar tipo de vehículo" },
-    { value: "car", label: "Car" },
-    { value: "bike", label: "Bike" },
-    { value: "bus", label: "Bus" },
-    { value: "truck", label: "Truck" },
-    { value: "other", label: "Other" },
+    { value: "car", label: "Coche" },
+    { value: "bike", label: "Bicicleta" },
+    { value: "bus", label: "Autobús" },
+    { value: "truck", label: "Camión" },
+    { value: "other", label: "Otro" },
   ];
 
   return (
@@ -307,7 +307,7 @@ export default function CreateNewVehicleModal({ onClose }) {
               <div>
                 <input
                   {...register("crr", { required: "CRR es requerida" })}
-                  placeholder="Coeficiente de rodadura (CRR)"
+                  placeholder="Coeficiente de rodadura (µ)"
                   type="number"
                   step="0.0001"
                   className={`border rounded-lg p-3 text-sm w-full ${

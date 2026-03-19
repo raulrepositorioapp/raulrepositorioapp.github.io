@@ -261,10 +261,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                 />
               </FormField>
 
-              <FormField
-                label="Coeficiente de rodadura (CRR)"
-                error={errors.crr}
-              >
+              <FormField label="Coeficiente de rodadura (µ)" error={errors.crr}>
                 <input
                   {...register("crr", { required: "CRR es requerida" })}
                   type="number"

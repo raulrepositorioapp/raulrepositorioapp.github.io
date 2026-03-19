@@ -31,7 +31,7 @@ export default function Sidebar() {
           <div className="size-7">
             <HomeIconSVG />
           </div>
-          Hogar
+          INICIO
         </NavLink>
 
         <NavLink

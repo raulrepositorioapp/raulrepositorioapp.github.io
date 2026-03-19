@@ -93,10 +93,10 @@ export default function EVRouteTable() {
                     Fecha
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Distancia
+                    Distancia (km)
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Consumo de energía
+                    Consumo de energía (kWh)
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                     Estado

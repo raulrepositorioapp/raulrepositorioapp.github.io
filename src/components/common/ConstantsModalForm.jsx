@@ -124,7 +124,7 @@ export default function ConstantsModalForm({ onClose, constants }) {
                 />
               </FormField>
 
-              <FormField label="Eficiencia del cargador (%)">
+              <FormField label="Eficiencia del cargador">
                 <input
                   type="number"
                   step="any"
