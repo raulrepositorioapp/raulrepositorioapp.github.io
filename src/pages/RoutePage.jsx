@@ -26,6 +26,7 @@ export default function RoutePage() {
           <RoutePlanningSection
             vehicleData={vehicleData}
             setLocationCoordinates={setLocationCoordinates}
+            locationCoordinates={locationCoordinates}
           />
         </LoadScript>
       </div>

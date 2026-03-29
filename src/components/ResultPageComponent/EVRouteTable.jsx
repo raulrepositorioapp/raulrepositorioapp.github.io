@@ -122,10 +122,10 @@ export default function EVRouteTable() {
                       {route?.date}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
-                      {route?.distance_km}
+                      {route?.distance_km} km
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
-                      {route?.energy_kwh}
+                      {route?.energy_kwh} kWh
                     </td>
                     <td className="px-6 py-4">
                       <span

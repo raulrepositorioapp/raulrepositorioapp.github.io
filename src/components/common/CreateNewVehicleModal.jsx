@@ -337,7 +337,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("auxiliaryPowerKW", {
                     required: "Potencia auxiliar es requerida",
                   })}
-                  placeholder="Potencia gastada auxiliar (kW)"
+                  placeholder="Potencia gastada auxiliar (incluye aire acondicionado/calefacción…) (kW)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
@@ -381,7 +381,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("upperSOC", {
                     required: "Límite superior de SOC es requerido",
                   })}
-                  placeholder="SOC superior (%)"
+                  placeholder="State of Charge (Estado de Carga) (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${

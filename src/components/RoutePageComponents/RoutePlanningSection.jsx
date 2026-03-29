@@ -33,6 +33,7 @@ const DEFAULT_DESTINATION = {
 export default function RoutePlanningSection({
   vehicleData,
   setLocationCoordinates,
+  locationCoordinates,
 }) {
   // Global States
   const navigate = useNavigate();
@@ -64,7 +65,9 @@ export default function RoutePlanningSection({
   const { mutate: calculateRoute, isPending: isCalculatePending } =
     useCalculateRoute({
       onSuccess: (data) => {
-        navigate("/route-analysis-results", { state: data });
+        navigate("/route-analysis-results", {
+          state: { data, locationCoordinates },
+        });
       },
       onError: (err) => {
         console.log(err);
