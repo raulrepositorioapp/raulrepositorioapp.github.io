@@ -2,6 +2,13 @@ import React from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 export default function RouteSummary({ route_summary, averageSpeed }) {
+  // Min to hour converter function
+  const minToHour = (min) => {
+    const hours = Math.floor(min / 60);
+    const minutes = Math.round(min % 60);
+    return `${hours}h ${minutes}m`;
+  };
+
   return (
     <div className="rounded-2xl p-6 bg-white border">
       {/* Header */}
@@ -9,16 +16,12 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
         <h1 className="text-2xl font-semibold text-gray-900 mb-2">
           Resumen de la ruta
         </h1>
-        <p className="text-base text-gray-600">
-          Pérdida de energía por fuente a lo largo de los segmentos de la ruta.
-        </p>
       </div>
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 gap-8 mb-8">
         {/* Route Information */}
         <div>
-          <h2 className="title2 mb-4 font-bold">Información de la ruta</h2>
           <div className="border rounded-md">
             <Table>
               <TableBody>
@@ -30,6 +33,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                     {route_summary?.origin}
                   </TableCell>
                 </TableRow>
+
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
                     Destino
@@ -38,6 +42,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                     {route_summary?.destination}
                   </TableCell>
                 </TableRow>
+
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
                     Distancia total
@@ -46,6 +51,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                     {route_summary?.total_distance_km} km
                   </TableCell>
                 </TableRow>
+
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
                     Velocidad promedio
@@ -54,6 +60,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                     {averageSpeed} km/h
                   </TableCell>
                 </TableRow>
+
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
                     Consumo promedio
@@ -62,12 +69,67 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                     {route_summary?.avg_consumption_kwh_100km} kWh/100km
                   </TableCell>
                 </TableRow>
+
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black!">
                     Paradas
                   </TableCell>
                   <TableCell className="text-right paragraph">
                     {route_summary?.charging_stop_count}
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="font-medium paragraph text-black!">
+                    Duración del viaje con paradas
+                  </TableCell>
+                  <TableCell className="text-right paragraph">
+                    {minToHour(route_summary?.trip_duration_min_with_stops)}
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="font-medium paragraph text-black!">
+                    Duración del viaje sin paradas
+                  </TableCell>
+                  <TableCell className="text-right paragraph">
+                    {minToHour(route_summary?.trip_duration_min_no_stops)}
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="font-medium paragraph text-black!">
+                    Energía total demandada por tracción
+                  </TableCell>
+                  <TableCell className="text-right paragraph">
+                    {route_summary?.E_traccion_total} kWh
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="font-medium paragraph text-black!">
+                    Energía total demandada por sistemas auxiliares
+                  </TableCell>
+                  <TableCell className="text-right paragraph">
+                    {route_summary?.E_aux_total} kWh
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="font-medium paragraph text-black!">
+                    Energía total recuperada mediante frenado regenerativo
+                  </TableCell>
+                  <TableCell className="text-right paragraph">
+                    {route_summary?.E_regen_total} kWh
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="font-medium paragraph text-black!">
+                    Energía neta consumida por el vehiculo electrico
+                  </TableCell>
+                  <TableCell className="text-right paragraph">
+                    {route_summary?.E_consumida} kWh
                   </TableCell>
                 </TableRow>
               </TableBody>
