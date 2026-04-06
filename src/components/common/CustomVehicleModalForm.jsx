@@ -379,6 +379,26 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
             </div>
           </div>
 
+          <div>
+            <ul className="pl-5 list-disc space-y-1">
+              <li className="text-sm text-gray-600">
+                <span className="font-semibold">n_drive: </span> incluye
+                inversor; Motor eléctrico; Reductor / transmisión; Pérdidas
+                eléctricas y mecánicas
+              </li>
+              <li className="text-sm text-gray-600">
+                <span className="font-semibold">
+                  Potencia gastada auxiliar:{" "}
+                </span>
+                incluye aire acondicionado/calefacción…
+              </li>
+              <li className="text-sm text-gray-600">
+                <span className="font-semibold">SOC: </span> State of Charge
+                (Estado de Carga)
+              </li>
+            </ul>
+          </div>
+
           {/* Photo Upload */}
           <div className="w-full">
             <label className="block text-sm font-medium mb-2">

@@ -419,39 +419,6 @@ export default function RoutePlanningSection({
                 Modelo:{" "}
                 <span className="text-[#637381]">{vehicleData?.name}</span>
               </h1>
-              <h1 className="title2">
-                Eficiencia del motor:{" "}
-                <span className="text-[#637381]">
-                  {vehicleData?.motor_efficiency}
-                </span>
-              </h1>
-              <h1 className="title2">
-                Batería:{" "}
-                <span className="text-[#637381]">
-                  {vehicleData?.nominal_battery_capacity_kwh} kWh
-                </span>
-              </h1>
-            </div>
-
-            <div className="space-y-2 text-end">
-              <h1 className="title2">
-                Tipo:{" "}
-                <span className="text-[#637381] capitalize">
-                  {vehicleData?.vehicle_type}
-                </span>
-              </h1>
-              <h1 className="title2">
-                Peso:{" "}
-                <span className="text-[#637381]">
-                  {vehicleData?.weight_kg} kg
-                </span>
-              </h1>
-              <h1 className="title2">
-                Área frontal:{" "}
-                <span className="text-[#637381]">
-                  {vehicleData?.frontal_area_m2} m²
-                </span>
-              </h1>
             </div>
           </div>
         </div>
