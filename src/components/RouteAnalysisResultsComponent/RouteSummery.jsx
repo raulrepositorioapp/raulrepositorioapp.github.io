@@ -26,110 +26,121 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
             <Table>
               <TableBody>
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black w-1/3 min-w-[150px] whitespace-normal">
                     Origen
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.origin}
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Destino
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.destination}
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Distancia total
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.total_distance_km} km
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Velocidad promedio
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {averageSpeed} km/h
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Consumo promedio
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.avg_consumption_kwh_100km} kWh/100km
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Paradas
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.charging_stop_count}
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Duración del viaje con paradas
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {minToHour(route_summary?.trip_duration_min_with_stops)}
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Duración del viaje sin paradas
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {minToHour(route_summary?.trip_duration_min_no_stops)}
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Energía total demandada por tracción
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.E_traccion_total} kWh
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Energía total demandada por sistemas auxiliares
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.E_aux_total} kWh
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
-                    Energía total recuperada mediante frenado regenerativo
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
+                    Energía recuperada mediate frenado regenerativo por cada
+                    100km
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.E_regen_total} kWh
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium paragraph text-black!">
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
                     Energía neta consumida por el vehiculo electrico
                   </TableCell>
-                  <TableCell className="text-right paragraph">
+                  <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.E_consumida} kWh
+                  </TableCell>
+                </TableRow>
+
+                <TableRow>
+                  <TableCell className="font-medium paragraph text-black whitespace-normal">
+                    Consumo Real
+                  </TableCell>
+                  <TableCell className="text-right paragraph whitespace-normal">
+                    El consumo real estimado se obtaine restando entre 1 y 3
+                    kWh/100 km al consumo calculado.
                   </TableCell>
                 </TableRow>
               </TableBody>
