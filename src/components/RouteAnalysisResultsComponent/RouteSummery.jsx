@@ -16,6 +16,12 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
         <h1 className="text-2xl font-semibold text-gray-900 mb-2">
           Resumen de la ruta
         </h1>
+
+        <p className="text-gray-600 mt-3">
+          Gracias al frenado regenerative, el vehículo puede recuperador
+          approximately between 1 and 3 kWh/100 km, depending on the type of
+          driving.
+        </p>
       </div>
 
       {/* Main Content Grid */}
