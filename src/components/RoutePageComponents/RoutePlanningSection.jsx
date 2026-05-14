@@ -175,15 +175,18 @@ export default function RoutePlanningSection({
   useEffect(() => {
     if (!window.google) return;
 
+    let originAutocomplete = null;
+    let destinationAutocomplete = null;
+
     // Origin
     if (originRef.current) {
-      const auto = new window.google.maps.places.Autocomplete(
+      originAutocomplete = new window.google.maps.places.Autocomplete(
         originRef.current,
         { types: ["address"] },
       );
 
-      auto.addListener("place_changed", () => {
-        const place = auto.getPlace();
+      originAutocomplete.addListener("place_changed", () => {
+        const place = originAutocomplete.getPlace();
         if (place?.formatted_address) {
           setValue("origin", place.formatted_address);
           const coords = getPlaceCoordinates(place);
@@ -196,13 +199,13 @@ export default function RoutePlanningSection({
 
     // Destination
     if (destinationRef.current) {
-      const auto = new window.google.maps.places.Autocomplete(
+      destinationAutocomplete = new window.google.maps.places.Autocomplete(
         destinationRef.current,
         { types: ["address"] },
       );
 
-      auto.addListener("place_changed", () => {
-        const place = auto.getPlace();
+      destinationAutocomplete.addListener("place_changed", () => {
+        const place = destinationAutocomplete.getPlace();
         if (place?.formatted_address) {
           setValue("destination", place.formatted_address);
           const coords = getPlaceCoordinates(place);
@@ -212,6 +215,23 @@ export default function RoutePlanningSection({
         }
       });
     }
+
+    // Cleanup function
+    return () => {
+      if (window.google && window.google.maps && window.google.maps.event) {
+        if (originAutocomplete) {
+          window.google.maps.event.clearInstanceListeners(originAutocomplete);
+        }
+        if (destinationAutocomplete) {
+          window.google.maps.event.clearInstanceListeners(
+            destinationAutocomplete,
+          );
+        }
+      }
+      // Remove any leftover .pac-container elements to prevent removeChild errors
+      const pacContainers = document.querySelectorAll(".pac-container");
+      pacContainers.forEach((container) => container.remove());
+    };
   }, [setValue]);
 
   // Form submit handler

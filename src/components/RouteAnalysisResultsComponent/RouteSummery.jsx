@@ -123,8 +123,7 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
 
                 <TableRow>
                   <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Energía recuperada mediate frenado regenerativo por cada
-                    100km
+                    Energía total recuperada mediate frenado regenerativeo
                   </TableCell>
                   <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.E_regen_total} kWh
@@ -137,16 +136,6 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
                   </TableCell>
                   <TableCell className="text-right paragraph whitespace-normal">
                     {route_summary?.E_consumida} kWh
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Consumo Real
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    El consumo real estimado se obtaine restando entre 1 y 3
-                    kWh/100 km al consumo calculado.
                   </TableCell>
                 </TableRow>
               </TableBody>
