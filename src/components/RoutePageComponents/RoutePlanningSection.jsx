@@ -40,9 +40,7 @@ export default function RoutePlanningSection({
 
   // Slider values
   const [sliderValues, setSliderValues] = useState({
-    startingCharge: 80,
     minArrivalCharge: 50,
-    minRouteSOC: 20,
   });
 
   // React Hook Form
@@ -259,10 +257,8 @@ export default function RoutePlanningSection({
       vehicle_id: vehicleData?.id,
       origin: data?.origin,
       destination: data?.destination,
-      start_soc: sliderValues?.startingCharge,
       min_arrival_soc: sliderValues?.minArrivalCharge,
       speed_kmh: data?.speed,
-      min_route_soc: sliderValues?.minRouteSOC,
     };
 
     calculateRoute(submissionData);
@@ -376,23 +372,6 @@ export default function RoutePlanningSection({
           </h1>
 
           <div className="mt-6">
-            <h1 className="title2 font-medium">Carga inicial</h1>
-            <div className="mt-4 flex items-center gap-2">
-              <Slider
-                value={[sliderValues.startingCharge]}
-                max={100}
-                step={1}
-                onValueChange={(value) =>
-                  handleSliderChange(value, "startingCharge")
-                }
-              />
-              <span translate="no" className="w-[5ch]">
-                {sliderValues.startingCharge}%
-              </span>
-            </div>
-          </div>
-
-          <div className="mt-6">
             <h1 className="title2 font-medium">Carga mínima de llegada</h1>
             <div className="mt-4 flex items-center gap-2">
               <Slider
@@ -405,23 +384,6 @@ export default function RoutePlanningSection({
               />
               <span translate="no" className="w-[5ch]">
                 {sliderValues.minArrivalCharge}%
-              </span>
-            </div>
-          </div>
-
-          <div className="mt-6">
-            <h1 className="title2 font-medium">SOC mínimo de ruta</h1>
-            <div className="mt-4 flex items-center gap-2">
-              <Slider
-                value={[sliderValues.minRouteSOC]}
-                max={100}
-                step={1}
-                onValueChange={(value) =>
-                  handleSliderChange(value, "minRouteSOC")
-                }
-              />
-              <span translate="no" className="w-[5ch]">
-                {sliderValues.minRouteSOC}%
               </span>
             </div>
           </div>

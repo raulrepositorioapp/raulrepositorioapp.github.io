@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, BatteryCharging, Clock, Gauge, TrendingUp } from "lucide-react";
 import CommonButton from "../common/CommonButton";
-import Loader from "../common/Loader";
 
 export default function RouteAnalysisResultsTopSection({
   analysisData,
@@ -36,7 +35,9 @@ export default function RouteAnalysisResultsTopSection({
       id: 4,
       title: "SoC de llegada",
       value: analysisData?.arrival_soc + "%",
-      extraInfo: "Comenzado en " + analysisData?.start_soc + "%",
+      extraInfo: analysisData?.start_soc
+        ? "Comenzado en " + analysisData?.start_soc + "%"
+        : null,
       icon: Gauge,
     },
   ];
