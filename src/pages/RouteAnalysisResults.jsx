@@ -3,6 +3,7 @@ import EnergyProfileElevationChart from "@/components/RouteAnalysisResultsCompon
 import RouteAnalysisResultsTopSection from "@/components/RouteAnalysisResultsComponent/RouteAnalysisResultsTopSection";
 import RouteSummery from "@/components/RouteAnalysisResultsComponent/RouteSummery";
 import RouteMapSection from "@/components/RoutePageComponents/RouteMapSection";
+import RoutePlanningSummary from "@/components/RouteAnalysisResultsComponent/RoutePlanningSummary";
 import React from "react";
 import { useLocation } from "react-router-dom";
 
@@ -16,6 +17,8 @@ export default function RouteAnalysisResults() {
         locationData={analysisData?.route_summary}
         analysisData={analysisData?.summary_cards}
       />
+
+      <RoutePlanningSummary planning={analysisData?.planning} />
 
       <div className="grid grid-cols-2 mt-6 gap-6">
         <EnergyProfileElevationChart
