@@ -42,6 +42,8 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
       motorEfficiency: vehicle?.motor_efficiency || "",
       auxiliaryPowerKW: vehicle?.auxiliary_power_kw || "",
       passengerMassKg: vehicle?.passenger_mass_kg || "",
+      averageConsumptionKwhPer100km:
+        vehicle?.average_consumption_kwh_per_100km || "",
       vehiclePhoto: undefined,
     },
   });
@@ -98,6 +100,10 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
     submittedData.append("motor_efficiency", data.motorEfficiency);
     submittedData.append("auxiliary_power_kw", data.auxiliaryPowerKW);
     submittedData.append("passenger_mass_kg", data.passengerMassKg);
+    submittedData.append(
+      "average_consumption_kwh_per_100km",
+      data.averageConsumptionKwhPer100km,
+    );
 
     if (file) {
       submittedData.append("photo", file);
@@ -302,6 +308,24 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
                     errors.auxiliaryPowerKW
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                />
+              </FormField>
+
+              <FormField
+                label="Consumo promedio (kWh/100km)"
+                error={errors.averageConsumptionKwhPer100km}
+              >
+                <input
+                  {...register("averageConsumptionKwhPer100km", {
+                    required: "Consumo promedio es requerido",
+                  })}
+                  type="number"
+                  step="0.1"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.averageConsumptionKwhPer100km
                       ? "border-red-500"
                       : "border-gray-300"
                   }`}

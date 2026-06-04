@@ -33,6 +33,7 @@ export default function CreateNewVehicleModal({ onClose }) {
       motorEfficiency: "",
       auxiliaryPowerKW: "",
       passengerMassKg: "",
+      averageConsumptionKwhPer100km: "",
       vehiclePhoto: undefined,
     },
   });
@@ -67,6 +68,7 @@ export default function CreateNewVehicleModal({ onClose }) {
             motor_efficiency: "motorEfficiency",
             auxiliary_power_kw: "auxiliaryPowerKW",
             passenger_mass_kg: "passengerMassKg",
+            average_consumption_kwh_per_100km: "averageConsumptionKwhPer100km",
 
             photo: "vehiclePhoto",
           };
@@ -117,6 +119,10 @@ export default function CreateNewVehicleModal({ onClose }) {
     submittedData.append("motor_efficiency", data.motorEfficiency); //
     submittedData.append("auxiliary_power_kw", data.auxiliaryPowerKW); //
     submittedData.append("passenger_mass_kg", data.passengerMassKg); //
+    submittedData.append(
+      "average_consumption_kwh_per_100km",
+      data.averageConsumptionKwhPer100km,
+    ); //
 
     if (file) {
       submittedData.append("photo", file); //
@@ -346,6 +352,27 @@ export default function CreateNewVehicleModal({ onClose }) {
                       : "border-gray-300"
                   }`}
                 />
+              </div>
+
+              <div>
+                <input
+                  {...register("averageConsumptionKwhPer100km", {
+                    required: "Consumo promedio es requerido",
+                  })}
+                  placeholder="Consumo promedio (kWh/100km)"
+                  type="number"
+                  step="0.1"
+                  className={`border rounded-lg p-3 text-sm w-full ${
+                    errors.averageConsumptionKwhPer100km
+                      ? "border-red-500"
+                      : "border-gray-300"
+                  }`}
+                />
+                {errors.averageConsumptionKwhPer100km && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.averageConsumptionKwhPer100km.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
