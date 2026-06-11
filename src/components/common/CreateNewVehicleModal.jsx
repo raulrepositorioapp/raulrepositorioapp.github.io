@@ -369,7 +369,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   {...register("upperSOC", {
                     required: "Límite superior de SOC es requerido",
                   })}
-                  placeholder="State of Charge (Estado de Carga) (%)"
+                  placeholder="SOC superior (%)"
                   type="number"
                   step="0.1"
                   className={`border rounded-lg p-3 text-sm w-full ${
