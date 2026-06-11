@@ -29,7 +29,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
   } = useForm({
     defaultValues: {
       vehicleName: vehicle?.name || "",
-      vehicleType: vehicle?.vehicle_type || "",
+      vehicleType: vehicle?.vehicle_type || "car",
       weightKg: vehicle?.weight_kg || "",
       frontalArea: vehicle?.frontal_area_m2 || "",
       dragCoefficient: vehicle?.drag_coefficient || "",
@@ -129,15 +129,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
     };
   }, [previewUrl, hasFile]);
 
-  const vehicleTypeOptions = [
-    { value: "", label: "Seleccionar tipo de vehículo" },
-    { value: "car", label: "Car" },
-    { value: "bike", label: "Bike" },
-    { value: "bus", label: "Bus" },
-    { value: "truck", label: "Truck" },
-    { value: "other", label: "Other" },
-  ];
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
@@ -168,23 +159,6 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                     errors.vehicleName ? "border-red-500" : "border-gray-300"
                   }`}
                 />
-              </FormField>
-
-              <FormField label="Tipo de vehículo" error={errors.vehicleType}>
-                <select
-                  {...register("vehicleType", {
-                    required: "Tipo de vehículo es requerido",
-                  })}
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.vehicleType ? "border-red-500" : "border-gray-300"
-                  }`}
-                >
-                  {vehicleTypeOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
               </FormField>
 
               <FormField label="Masa del vehículo (kg)" error={errors.weightKg}>
@@ -331,14 +305,7 @@ export default function CustomVehicleModalForm({ onClose, vehicle }) {
                   }`}
                 />
               </FormField>
-            </div>
-          </div>
 
-          {/* Battery section */}
-          <div className="border rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Batería</h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 label="Capacidad utilizable bateria (kWh)"
                 error={errors.usableBatteryCapacity}

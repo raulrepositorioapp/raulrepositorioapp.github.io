@@ -20,7 +20,7 @@ export default function CreateNewVehicleModal({ onClose }) {
   } = useForm({
     defaultValues: {
       vehicleName: "",
-      vehicleType: "",
+      vehicleType: "car",
       weightKg: "",
       frontalArea: "",
       dragCoefficient: "",
@@ -142,15 +142,6 @@ export default function CreateNewVehicleModal({ onClose }) {
     };
   }, [previewUrl]);
 
-  const vehicleTypeOptions = [
-    { value: "", label: "Seleccionar tipo de vehículo" },
-    { value: "car", label: "Coche" },
-    { value: "bike", label: "Bicicleta" },
-    { value: "bus", label: "Autobús" },
-    { value: "truck", label: "Camión" },
-    { value: "other", label: "Otro" },
-  ];
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
@@ -185,29 +176,6 @@ export default function CreateNewVehicleModal({ onClose }) {
                 {errors.vehicleName && (
                   <p className="text-red-500 text-xs mt-1">
                     {errors.vehicleName.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Vehicle Type Select */}
-              <div>
-                <select
-                  {...register("vehicleType", {
-                    required: "Tipo de vehículo es requerido",
-                  })}
-                  className={`border rounded-lg p-3 text-sm w-full ${
-                    errors.vehicleType ? "border-red-500" : "border-gray-300"
-                  }`}
-                >
-                  {vehicleTypeOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                {errors.vehicleType && (
-                  <p className="text-red-500 text-xs mt-1">
-                    {errors.vehicleType.message}
                   </p>
                 )}
               </div>
@@ -374,14 +342,7 @@ export default function CreateNewVehicleModal({ onClose }) {
                   </p>
                 )}
               </div>
-            </div>
-          </div>
 
-          {/* Battery section remains unchanged */}
-          <div className="border rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Batería</h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <input
                   {...register("usableBatteryCapacity", {
