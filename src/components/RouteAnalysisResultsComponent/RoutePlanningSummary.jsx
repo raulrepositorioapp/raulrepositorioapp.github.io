@@ -108,12 +108,12 @@ export default function RoutePlanningSummary({ planning }) {
       icon: Power,
       color: "bg-sky-50 text-sky-600 border-sky-100",
     },
-    {
-      label: "Criterio de selección",
-      value: formatSelection(planning.charger_selection),
-      icon: Sliders,
-      color: "bg-indigo-50 text-indigo-600 border-indigo-100",
-    },
+    // {
+    //   label: "Criterio de selección",
+    //   value: formatSelection(planning.charger_selection),
+    //   icon: Sliders,
+    //   color: "bg-indigo-50 text-indigo-600 border-indigo-100",
+    // },
   ];
 
   return (
