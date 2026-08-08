@@ -20,10 +20,10 @@ export default function RouteAnalysisResults() {
 
       <RoutePlanningSummary planning={analysisData?.planning} />
 
-      <div className="grid grid-cols-2 mt-6 gap-6">
-        <EnergyProfileElevationChart
+      <div className="grid grid-cols-1 mt-6 gap-6">
+        {/* <EnergyProfileElevationChart
           elevationData={analysisData?.soc_profile_graph}
-        />
+        /> */}
 
         <RouteSummery
           route_summary={analysisData?.route_summary}
