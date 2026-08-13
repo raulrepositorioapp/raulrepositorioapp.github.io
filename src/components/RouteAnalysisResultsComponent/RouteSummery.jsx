@@ -9,6 +9,57 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
     return `${hours}h ${minutes}m`;
   };
 
+  const summaryItems = [
+    {
+      label: "Origen",
+      value: route_summary?.origin,
+    },
+    {
+      label: "Destino",
+      value: route_summary?.destination,
+    },
+    {
+      label: "Distancia total",
+      value: route_summary?.total_distance_km !== undefined ? `${route_summary.total_distance_km} km` : null,
+    },
+    {
+      label: "Velocidad promedio",
+      value: averageSpeed !== undefined ? `${averageSpeed} km/h` : null,
+    },
+    {
+      label: "Consumo promedio",
+      value: route_summary?.avg_consumption_kwh_100km !== undefined ? `${route_summary.avg_consumption_kwh_100km} kWh/100km` : null,
+    },
+    {
+      label: "Paradas",
+      value: route_summary?.charging_stop_count,
+    },
+    {
+      label: "Duración del viaje con paradas",
+      value: route_summary?.trip_duration_min_with_stops !== undefined ? minToHour(route_summary.trip_duration_min_with_stops) : null,
+    },
+    {
+      label: "Duración del viaje sin paradas",
+      value: route_summary?.trip_duration_min_no_stops !== undefined ? minToHour(route_summary.trip_duration_min_no_stops) : null,
+    },
+    {
+      label: "Energía total demandada por tracción",
+      value: route_summary?.E_traccion_total !== undefined ? `${route_summary.E_traccion_total} kWh` : null,
+    },
+    {
+      label: "Energía total demandada por sistemas auxiliares",
+      value: route_summary?.E_aux_total !== undefined ? `${route_summary.E_aux_total} kWh` : null,
+    },
+    {
+      label: "Energía total recuperada mediate frenado regenerativeo",
+      value: route_summary?.E_regen_total !== undefined ? `${route_summary.E_regen_total} kWh` : null,
+    },
+    {
+      label: "Energía neta consumida por el vehiculo electrico",
+      value: route_summary?.E_consumida !== undefined ? `${route_summary.E_consumida} kWh` : null,
+    },
+  ];
+
   return (
     <div className="rounded-2xl p-6 bg-white border">
       {/* Header */}
@@ -25,113 +76,16 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
           <div className="border rounded-md">
             <Table>
               <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black w-1/3 min-w-[150px] whitespace-normal">
-                    Origen
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.origin}
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Destino
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.destination}
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Distancia total
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.total_distance_km} km
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Velocidad promedio
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {averageSpeed} km/h
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Consumo promedio
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.avg_consumption_kwh_100km} kWh/100km
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Paradas
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.charging_stop_count}
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Duración del viaje con paradas
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {minToHour(route_summary?.trip_duration_min_with_stops)}
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Duración del viaje sin paradas
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {minToHour(route_summary?.trip_duration_min_no_stops)}
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Energía total demandada por tracción
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.E_traccion_total} kWh
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Energía total demandada por sistemas auxiliares
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.E_aux_total} kWh
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Energía total recuperada mediate frenado regenerativeo
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.E_regen_total} kWh
-                  </TableCell>
-                </TableRow>
-
-                <TableRow>
-                  <TableCell className="font-medium paragraph text-black whitespace-normal">
-                    Energía neta consumida por el vehiculo electrico
-                  </TableCell>
-                  <TableCell className="text-right paragraph whitespace-normal">
-                    {route_summary?.E_consumida} kWh
-                  </TableCell>
-                </TableRow>
+                {summaryItems.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium paragraph text-black w-1/3 min-w-[150px] whitespace-normal">
+                      {item.label}
+                    </TableCell>
+                    <TableCell className="text-right paragraph whitespace-normal">
+                      {item.value ?? "—"}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </div>
