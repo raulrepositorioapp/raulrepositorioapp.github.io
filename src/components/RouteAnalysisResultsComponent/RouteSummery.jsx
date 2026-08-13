@@ -20,7 +20,10 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
     },
     {
       label: "Distancia total",
-      value: route_summary?.total_distance_km !== undefined ? `${route_summary.total_distance_km} km` : null,
+      value:
+        route_summary?.total_distance_km !== undefined
+          ? `${route_summary.total_distance_km} km`
+          : null,
     },
     {
       label: "Velocidad promedio",
@@ -28,7 +31,10 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
     },
     {
       label: "Consumo promedio",
-      value: route_summary?.avg_consumption_kwh_100km !== undefined ? `${route_summary.avg_consumption_kwh_100km} kWh/100km` : null,
+      value:
+        route_summary?.avg_consumption_kwh_100km !== undefined
+          ? `${route_summary.avg_consumption_kwh_100km} kWh/100km`
+          : null,
     },
     {
       label: "Paradas",
@@ -36,27 +42,45 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
     },
     {
       label: "Duración del viaje con paradas",
-      value: route_summary?.trip_duration_min_with_stops !== undefined ? minToHour(route_summary.trip_duration_min_with_stops) : null,
+      value:
+        route_summary?.trip_duration_min_with_stops !== undefined
+          ? minToHour(route_summary.trip_duration_min_with_stops)
+          : null,
     },
     {
       label: "Duración del viaje sin paradas",
-      value: route_summary?.trip_duration_min_no_stops !== undefined ? minToHour(route_summary.trip_duration_min_no_stops) : null,
+      value:
+        route_summary?.trip_duration_min_no_stops !== undefined
+          ? minToHour(route_summary.trip_duration_min_no_stops)
+          : null,
     },
     {
       label: "Energía total demandada por tracción",
-      value: route_summary?.E_traccion_total !== undefined ? `${route_summary.E_traccion_total} kWh` : null,
+      value:
+        route_summary?.E_traccion_total !== undefined
+          ? `${route_summary.E_traccion_total} kWh`
+          : null,
     },
     {
       label: "Energía total demandada por sistemas auxiliares",
-      value: route_summary?.E_aux_total !== undefined ? `${route_summary.E_aux_total} kWh` : null,
+      value:
+        route_summary?.E_aux_total !== undefined
+          ? `${route_summary.E_aux_total} kWh`
+          : null,
     },
     {
       label: "Energía total recuperada mediate frenado regenerativeo",
-      value: route_summary?.E_regen_total !== undefined ? `${route_summary.E_regen_total} kWh` : null,
+      value:
+        route_summary?.E_regen_total !== undefined
+          ? `${route_summary.E_regen_total} kWh`
+          : null,
     },
     {
       label: "Energía neta consumida por el vehiculo electrico",
-      value: route_summary?.E_consumida !== undefined ? `${route_summary.E_consumida} kWh` : null,
+      value:
+        route_summary?.E_consumida !== undefined
+          ? `${route_summary.E_consumida} kWh`
+          : null,
     },
   ];
 
@@ -76,12 +100,12 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
           <div className="border rounded-md">
             <Table>
               <TableBody>
-                {summaryItems.map((item, index) => (
+                {summaryItems?.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell className="font-medium paragraph text-black w-1/3 min-w-[150px] whitespace-normal">
+                    <TableCell className="font-semibold paragraph text-slate-900 w-1/3 min-w-[150px] whitespace-normal">
                       {item.label}
                     </TableCell>
-                    <TableCell className="text-right paragraph whitespace-normal">
+                    <TableCell className="text-right paragraph font-semibold text-slate-800 whitespace-normal">
                       {item.value ?? "—"}
                     </TableCell>
                   </TableRow>
