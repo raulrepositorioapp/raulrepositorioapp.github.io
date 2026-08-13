@@ -35,7 +35,10 @@ export default function RouteAnalysisResults() {
         <ChargingStops ChargingStops={analysisData?.charging_stops} />
 
         <div>
-          <RouteMapSection locationCoordinates={locationCoordinates} />
+          <RouteMapSection
+            locationCoordinates={locationCoordinates}
+            chargingStops={analysisData?.charging_stops}
+          />
         </div>
       </div>
     </div>
