@@ -102,10 +102,10 @@ export default function RouteSummary({ route_summary, averageSpeed }) {
               <TableBody>
                 {summaryItems?.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell className="font-semibold paragraph text-slate-900 w-1/3 min-w-[150px] whitespace-normal">
+                    <TableCell className="font-semibold text-slate-900 text-base w-1/3 min-w-[150px] whitespace-normal">
                       {item.label}
                     </TableCell>
-                    <TableCell className="text-right paragraph font-semibold text-slate-800 whitespace-normal">
+                    <TableCell className="text-right font-semibold text-slate-900 text-base whitespace-normal">
                       {item.value ?? "—"}
                     </TableCell>
                   </TableRow>
