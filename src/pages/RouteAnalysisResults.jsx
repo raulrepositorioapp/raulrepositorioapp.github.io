@@ -31,15 +31,12 @@ export default function RouteAnalysisResults() {
         />
       </div>
 
-      <div className="grid grid-cols-2 mt-6 gap-6">
+      <div className="flex flex-col mt-6 gap-6">
+        <RouteMapSection
+          locationCoordinates={locationCoordinates}
+          chargingStops={analysisData?.charging_stops}
+        />
         <ChargingStops ChargingStops={analysisData?.charging_stops} />
-
-        <div>
-          <RouteMapSection
-            locationCoordinates={locationCoordinates}
-            chargingStops={analysisData?.charging_stops}
-          />
-        </div>
       </div>
     </div>
   );
