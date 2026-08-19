@@ -14,6 +14,7 @@ import CommonButton from "../common/CommonButton";
 import useCalculateRoute from "@/hooks/Calculate/useCalculateRoute";
 import Loader from "../common/Loader";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 // Default coordinates
 const DEFAULT_ORIGIN = {
@@ -68,7 +69,16 @@ export default function RoutePlanningSection({
         });
       },
       onError: (err) => {
-        console.log(err);
+        console.error(err);
+        const errorMsg =
+          err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.response?.data?.detail ||
+          (err?.response?.data && typeof err.response.data === "object"
+            ? Object.values(err.response.data).flat()[0]
+            : null) ||
+          "Ocurrió un error al calcular la ruta. Por favor, intente de nuevo.";
+        toast.error(errorMsg);
       },
     });
 
